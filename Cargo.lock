@@ -178,6 +178,33 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0a5c400df2834b80a4c3327b3aad3a4c4cd4de0629063962b03235697506a28"
 
 [[package]]
+name = "decrypteet"
+version = "0.1.0"
+dependencies = [
+ "ashpd",
+ "async-channel",
+ "derivative",
+ "exiftool",
+ "fdlimit",
+ "futures",
+ "gettext-rs",
+ "glib",
+ "gtk4",
+ "gtk4-macros 0.10.3",
+ "itertools",
+ "libadwaita",
+ "log",
+ "once_cell",
+ "pretty_env_logger",
+ "rand",
+ "regex",
+ "serde_json",
+ "shared_child",
+ "tempfile",
+ "tokio",
+]
+
+[[package]]
 name = "derivative"
 version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1005,33 +1032,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "488016bfae457b036d996092f6cb448677611ce4449e970ceaf42695203f218a"
 dependencies = [
  "autocfg",
-]
-
-[[package]]
-name = "metamorphosis"
-version = "0.4.0"
-dependencies = [
- "ashpd",
- "async-channel",
- "derivative",
- "exiftool",
- "fdlimit",
- "futures",
- "gettext-rs",
- "glib",
- "gtk4",
- "gtk4-macros 0.10.3",
- "itertools",
- "libadwaita",
- "log",
- "once_cell",
- "pretty_env_logger",
- "rand",
- "regex",
- "serde_json",
- "shared_child",
- "tempfile",
- "tokio",
 ]
 
 [[package]]

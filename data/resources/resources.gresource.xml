@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-    <gresource prefix="/dev/deimoshall/Metamorphosis/">
-        <file alias="dev.deimoshall.Metamorphosis.metainfo.xml" preprocess="xml-stripblanks">../dev.deimoshall.Metamorphosis.metainfo.xml</file>
+    <gresource prefix="/dev/deimoshall/Decrypteet/">
+        <file alias="dev.deimoshall.Decrypteet.metainfo.xml" preprocess="xml-stripblanks">../dev.deimoshall.Decrypteet.metainfo.xml</file>
         <file compressed="true">style.css</file>
         <file compressed="true">style-hc.css</file>
-        <file preprocess="xml-stripblanks">icons/hicolor/symbolic/apps/dev.deimoshall.Metamorphosis-symbolic.svg</file>
-        <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.png</file>
-        <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.Devel.png</file>
+        <file preprocess="xml-stripblanks">icons/hicolor/symbolic/apps/dev.deimoshall.Decrypteet-symbolic.svg</file>
+        <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Decrypteet.png</file>
+        <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Decrypteet.Devel.png</file>
     </gresource>
 
-    <gresource prefix="/dev/deimoshall/Metamorphosis/ui/">
+    <gresource prefix="/dev/deimoshall/Decrypteet/ui/">
         <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">window.ui</file>
         <file compressed="true" preprocess="xml-stripblanks" alias="components/image-thumbnail.ui">components-image_thumbnail.ui</file>
         <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/mod.ui">views-apply-mod.ui</file>
@@ -17,12 +17,12 @@
         <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/image_advanced_tab.ui">views-apply-image_advanced_tab.ui</file>
     </gresource>
 
-    <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/apps/">
+    <gresource prefix="/dev/deimoshall/Decrypteet/icons/scalable/apps/">
         <file alias="io.gitlab.adhami3310.Impression.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/io.gitlab.adhami3310.Impression.svg</file>
         <file alias="io.gitlab.adhami3310.Footage.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/io.gitlab.adhami3310.Footage.svg</file>
     </gresource>
 
-    <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/actions/">
+    <gresource prefix="/dev/deimoshall/Decrypteet/icons/scalable/actions/">
         <file alias="build-alt-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/build-alt-symbolic.svg</file>
         <file alias="build-configure-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/build-configure-symbolic.svg</file>
         <file alias="im-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/im-symbolic.svg</file>

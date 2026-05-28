@@ -1,12 +1,12 @@
 {
-    "app-id": "dev.deimoshall.Metamorphosis",
+    "app-id": "dev.deimoshall.Decrypteet",
     "runtime": "org.gnome.Platform",
     "runtime-version": "50",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "command": "metamorphosis",
+    "command": "decrypteet",
     "finish-args": [
         "--share=ipc",
         "--socket=fallback-x11",
@@ -154,7 +154,7 @@
             ]
         },
         {
-            "name": "metamorphosis",
+            "name": "decrypteet",
             "builddir": true,
             "buildsystem": "meson",
             "config-opts": [

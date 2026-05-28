@@ -1,26 +1,26 @@
 <div align="center">
-<h1>Metamorphosis</h1>
+<h1>Decrypteet</h1>
 
 Edit file's metadata.
 
-<img src="data/resources/icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.png" width="128" height="128" alt="Metamorphosis icon">
+<img src="data/resources/icons/hicolor/512x512/apps/dev.deimoshall.Decrypteet.png" width="128" height="128" alt="Decrypteet icon">
 
-[![Installs](https://img.shields.io/flathub/downloads/dev.deimoshall.Metamorphosis?style=for-the-badge)](https://flathub.org/apps/details/dev.deimoshall.Metamorphosis)
-[![Latest Tag](https://img.shields.io/github/v/tag/deimoshall/Metamorphosis?sort=date&style=for-the-badge)](https://github.com/deimoshall/Metamorphosis/-/tags)
-[![License](https://img.shields.io/github/license/deimoshall/Metamorphosis?style=for-the-badge)](https://github.com/deimoshall/Metamorphosis/-/raw/main/LICENSE)
+[![Installs](https://img.shields.io/flathub/downloads/dev.deimoshall.Decrypteet?style=for-the-badge)](https://flathub.org/apps/details/dev.deimoshall.Decrypteet)
+[![Latest Tag](https://img.shields.io/github/v/tag/deimoshall/Decrypteet?sort=date&style=for-the-badge)](https://github.com/deimoshall/Decrypteet/-/tags)
+[![License](https://img.shields.io/github/license/deimoshall/Decrypteet?style=for-the-badge)](https://github.com/deimoshall/Decrypteet/-/raw/main/LICENSE)
 
 </div>
 
 ## Installation
-<a href='https://flathub.org/apps/details/dev.deimoshall.Metamorphosis'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
+<a href='https://flathub.org/apps/details/dev.deimoshall.Decrypteet'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
 
 ## About
 
-Metamorphosis is designed to help you edit exif metadata in a simple and reliable way.
+Decrypteet is designed to help you edit exif metadata in a simple and reliable way.
 
-<img src="data/resources/screenshots/0.png" alt="View of Metamorphosis">
+<img src="data/resources/screenshots/0.png" alt="View of Decrypteet">
 
-Metamorphosis supports editing the following datatypes:
+Decrypteet supports editing the following datatypes:
 
 - [x] **Images:**
   - [x] JPEG, JPG, JPE
@@ -54,25 +54,25 @@ The recommended method is to use GNOME Builder:
 
 1. Install [GNOME Builder](https://apps.gnome.org/app/org.gnome.Builder/) from Flathub
 2. Open Builder and select "Clone Repository..."
-3. Clone `https://github.com/DeimosHall/Metamorphosis.git` (or your fork)
+3. Clone `https://github.com/DeimosHall/Decrypteet.git` (or your fork)
 4. Press "Run Project" (▶) at the top, or `Ctrl`+`Shift`+`[Spacebar]`.
 
 ### Flatpak
 
-You can install Metamorphosis from the latest commit:
+You can install Decrypteet from the latest commit:
 
 1. Install [`org.flatpak.Builder`](https://github.com/flathub/org.flatpak.Builder) from Flathub
-2. Clone `https://github.com/DeimosHall/Metamorphosis.git` (or your fork)
+2. Clone `https://github.com/DeimosHall/Decrypteet.git` (or your fork)
 3. Install the app using `flatpak-builder`:
 
 ```bash
-flatpak-builder --force-clean --user --install builddir dev.deimoshall.Metamorphosis.json
+flatpak-builder --force-clean --user --install builddir dev.deimoshall.Decrypteet.json
 ```
 
 4. Run the app
 
 ```bash
-flatpak run dev.deimoshall.Metamorphosis
+flatpak run dev.deimoshall.Decrypteet
 ```
 
 ### Meson

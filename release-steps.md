@@ -11,18 +11,18 @@ The app version must be updated in two files:
 
 ## Release notes
 
-Add release notes on the [meta info](dev.deimoshall.Metamorphosis.metainfo.xml.in.in) file.
+Add release notes on the [meta info](dev.deimoshall.Decrypteet.metainfo.xml.in.in) file.
 
 ## Screenshots
 
 Update app screenshots if required.
 
-> New screenshots or modification of existing ones must be added/edited in the [meta info](dev.deimoshall.Metamorphosis.metainfo.xml.in.in) file.
+> New screenshots or modification of existing ones must be added/edited in the [meta info](dev.deimoshall.Decrypteet.metainfo.xml.in.in) file.
 
 ## Exiftool
 
 1. Verify the latest `exiftool` version here: [https://exiftool.org/](https://exiftool.org/)
-2. Update the version number in the url field on the [manifest](dev.deimoshall.Metamorphosis.json) file.
+2. Update the version number in the url field on the [manifest](dev.deimoshall.Decrypteet.json) file.
 3. Update the sha256 field, check the corresponding the the `exiftool` version here: [https://exiftool.org/checksums.txt](https://exiftool.org/checksums.txt)
 
 ## GitHub release
@@ -41,7 +41,7 @@ meson setup build --reconfigure
 meson dist -C build --allow-dirty --no-tests
 ```
 
-> This generates a tarball in `build/meson-dist/` named `metamorphosis-X.Y.Z.tar.xz`
+> This generates a tarball in `build/meson-dist/` named `decrypteet-X.Y.Z.tar.xz`
 
 6. Upload this tarball to the GitHub release
 
@@ -54,10 +54,10 @@ After tagging the release, update the flathub manifest:
 1. Go to my flathub repository:
 
 ```bash
-cd ~/Projects/infra/dev.deimoshall.Metamorphosis
+cd ~/Projects/infra/dev.deimoshall.Decrypteet
 ```
 
-1. Update the `url` in the metamorphosis module to point to my new release tarball
+1. Update the `url` in the decrypteet module to point to my new release tarball
 
 2. Update the `sha256` with the value from the file created by step 3
 

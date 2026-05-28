@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Metamorphosis
+Name=Decrypteet
 GenericName=EXIF Editor
 Comment=Edit EXIF metadata
-Exec=metamorphosis %U
+Exec=decrypteet %U
 Icon=@icon@
 Terminal=false
 Type=Application
@@ -16,7 +16,7 @@ MimeType=image/png;image/jpeg;image/webp;image/svg+xml;image/heic;image/heif;ima
 Actions=new-window;
 
 [Desktop Action new-window]
-Exec=metamorphosis --new-window
+Exec=decrypteet --new-window
 Name=New Window
 # TRANSLATORS: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=window-new
