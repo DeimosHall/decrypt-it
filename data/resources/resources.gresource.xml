@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="/dev/deimoshall/Metamorphosis/">
+        <file alias="dev.deimoshall.Metamorphosis.metainfo.xml" preprocess="xml-stripblanks">../dev.deimoshall.Metamorphosis.metainfo.xml</file>
+        <file compressed="true">style.css</file>
+        <file compressed="true">style-hc.css</file>
+        <file preprocess="xml-stripblanks">icons/hicolor/symbolic/apps/dev.deimoshall.Metamorphosis-symbolic.svg</file>
+        <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.png</file>
+        <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.Devel.png</file>
+    </gresource>
+
+    <gresource prefix="/dev/deimoshall/Metamorphosis/ui/">
+        <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">window.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="components/image-thumbnail.ui">components-image_thumbnail.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/mod.ui">views-apply-mod.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/image_general_tab.ui">views-apply-image_general_tab.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/image_advanced_tab.ui">views-apply-image_advanced_tab.ui</file>
+    </gresource>
+
+    <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/apps/">
+        <file alias="io.gitlab.adhami3310.Impression.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/io.gitlab.adhami3310.Impression.svg</file>
+        <file alias="io.gitlab.adhami3310.Footage.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/io.gitlab.adhami3310.Footage.svg</file>
+    </gresource>
+
+    <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/actions/">
+        <file alias="build-alt-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/build-alt-symbolic.svg</file>
+        <file alias="build-configure-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/build-configure-symbolic.svg</file>
+        <file alias="im-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/im-symbolic.svg</file>
+        <file alias="image-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/image-symbolic.svg</file>
+        <file alias="view-more-horizontal-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/view-more-horizontal-symbolic.svg</file>
+        <file alias="plus-large-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/plus-large-symbolic.svg</file>
+        <file alias="user-trash-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/user-trash-symbolic.svg</file>
+        <file alias="chain-link-loose-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/chain-link-loose-symbolic.svg</file>
+        <file alias="chain-link-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/chain-link-symbolic.svg</file>
+    </gresource>
+</gresources>

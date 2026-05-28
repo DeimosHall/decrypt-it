@@ -1,0 +1,227 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AppWindow: Adw.ApplicationWindow {
+  default-width: 750;
+  default-height: 750;
+  width-request: 300;
+  height-request: 300;
+  title: _("Metamorphosis");
+
+  Box {
+    orientation: vertical;
+
+    $DragOverlay drag_overlay {
+      title: _("Drop Here to Open");
+
+      child: Adw.ToastOverlay toast_overlay {
+        Adw.NavigationView navigation {
+          Adw.NavigationPage {
+            tag: "main";
+            title: _("Metamorphosis");
+
+            child: Adw.ToolbarView {
+              [top]
+              Adw.HeaderBar headerbar {
+                Button add_button {
+                  icon-name: 'plus-large-symbolic';
+                  tooltip-text: _("Add Files (Ctrl+O)");
+                  visible: false;
+
+                  styles [
+                    'flat',
+                  ]
+                }
+
+                [title]
+                Adw.ViewSwitcher view_switcher {
+                  visible: false; // Don't show at startup
+                  policy: wide;
+                }
+
+                [end]
+                MenuButton {
+                  icon-name: "open-menu-symbolic";
+                  menu-model: primary_menu;
+                  tooltip-text: _("Primary Menu");
+                  primary: true;
+                }
+              }
+
+              content: WindowHandle {
+                vexpand: true;
+
+                Stack stack {
+                  transition-type: crossfade;
+
+                  StackPage {
+                    name: "stack_welcome_page";
+
+                    child: Adw.StatusPage {
+                      icon-name: "dev.deimoshall.Metamorphosis";
+                      title: _("Metamorphosis");
+                      description: _("Drag and drop images here");
+                      hexpand: true;
+                      vexpand: true;
+
+                      child: Box {
+                        orientation: vertical;
+                        spacing: 12;
+
+                        Button open_button {
+                          valign: center;
+                          halign: center;
+                          label: _("_Open Images…");
+                          use-underline: true;
+
+                          styles [
+                            "suggested-action",
+                            "pill",
+                          ]
+                        }
+                      };
+
+                      styles [
+                        "icon-dropshadow",
+                      ]
+                    };
+                  }
+
+                  StackPage {
+                    name: "stack_loading";
+
+                    child: Adw.StatusPage {
+                      Spinner loading_spinner {
+                        valign: center;
+                        halign: center;
+                        height-request: 32;
+                        width-request: 32;
+                      }
+                    };
+                  }
+
+                  StackPage {
+                    name: "stack_apply";
+                    child: $ApplyView apply_view { };
+                  }
+                  
+                  StackPage {
+                    name: "stack_invalid_image";
+
+                    child: Adw.StatusPage invalid_image {
+                      icon-name: "im-symbolic";
+                      title: _("Could not Load Image");
+                      description: _("This image could be corrupted or may use an unsupported file format.");
+                      hexpand: true;
+                      vexpand: true;
+                    };
+                  }
+
+                  StackPage {
+                    name: "stack_applying";
+
+                    child: Adw.StatusPage {
+                      title: _("Applying");
+                      description: _("This could take a while");
+
+                      Box {
+                        orientation: vertical;
+                        spacing: 36;
+
+                        ProgressBar progress_bar {
+                          valign: center;
+                          halign: center;
+                          show-text: true;
+                          text: _("Loading…");
+                        }
+
+                        Button cancel_button {
+                          valign: center;
+                          halign: center;
+                          label: _("_Cancel");
+                          use-underline: true;
+
+                          styles [
+                            "destructive-action",
+                            "pill",
+                          ]
+                        }
+                      }
+                    };
+                  }
+                }
+              };
+            };
+          }
+        }
+      };
+    }
+  }
+}
+
+Adw.ShortcutsDialog help_overlay {
+  Adw.ShortcutsSection {
+    title: C_("shortcut window", "General");
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Show Shortcuts");
+      action-name: "win.show-help-overlay";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Quit");
+      action-name: "app.quit";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "New Window");
+      action-name: "app.new-window";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Clear Window");
+      action-name: "win.clear";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Paste From Clipboard");
+      action-name: "win.paste";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Add Images");
+      action-name: "win.add";
+    }
+  }
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("Paste From Clipboard");
+      action: "win.paste";
+    }
+
+    item {
+      label: _("New Window");
+      action: "app.new-window";
+    }
+
+    item {
+      label: _("Clear Window");
+      action: "win.clear";
+    }
+  }
+
+  section {
+    item {
+      label: _("Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("About Metamorphosis");
+      action: "win.about";
+    }
+  }
+}
