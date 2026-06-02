@@ -12,7 +12,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derive(Default)]
-    #[template(resource = "/dev/deimoshall/Decrypteet/ui/views/apply/image_advanced_tab.ui")]
+    #[template(resource = "/dev/deimoshall/DecryptIt/ui/views/apply/image_advanced_tab.ui")]
     pub struct ImageAdvancedTab {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,

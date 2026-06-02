@@ -21,7 +21,7 @@ mod imp {
 
     #[::glib::object_subclass]
     impl ObjectSubclass for App {
-        const NAME: &'static str = "DecrypteetApp";
+        const NAME: &'static str = "DecryptItApp";
         type Type = super::App;
         type ParentType = adw::Application;
 
@@ -129,7 +129,7 @@ impl Default for App {
         glib::Object::builder::<Self>()
             .property("application-id", Some(APP_ID))
             .property("flags", gio::ApplicationFlags::HANDLES_OPEN)
-            .property("resource-base-path", "/dev/deimoshall/Decrypteet/")
+            .property("resource-base-path", "/dev/deimoshall/DecryptIt/")
             .build()
     }
 }
@@ -181,7 +181,7 @@ impl App {
     }
 
     pub fn run(&self) -> ExitCode {
-        info!("Decrypteet ({APP_ID})");
+        info!("Decrypt It ({APP_ID})");
         info!("Version: {VERSION} ({PROFILE})");
         info!("Datadir: {PKGDATADIR}");
 

@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Decrypteet
+Name=Decrypt It
 GenericName=EXIF Editor
 Comment=Edit EXIF metadata
-Exec=decrypteet %U
+Exec=decrypt-it %U
 Icon=@icon@
 Terminal=false
 Type=Application
@@ -16,7 +16,7 @@ MimeType=image/png;image/jpeg;image/webp;image/svg+xml;image/heic;image/heif;ima
 Actions=new-window;
 
 [Desktop Action new-window]
-Exec=decrypteet --new-window
+Exec=decrypt-it --new-window
 Name=New Window
 # TRANSLATORS: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=window-new

@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 use std::sync::atomic::AtomicUsize;
 
-use crate::components::about_window::DecrypteetAbout;
+use crate::components::about_window::DecryptItAbout;
 use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
@@ -59,7 +59,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Decrypteet/ui/window.ui")]
+    #[template(resource = "/dev/deimoshall/DecryptIt/ui/window.ui")]
     pub struct AppWindow {
         #[template_child]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
@@ -125,7 +125,7 @@ mod imp {
 
             // Load CSS
             let provider = gtk::CssProvider::new();
-            provider.load_from_resource("/dev/deimoshall/Decrypteet/style.css");
+            provider.load_from_resource("/dev/deimoshall/DecryptIt/style.css");
 
             if let Some(display) = gtk::gdk::Display::default() {
                 gtk::style_context_add_provider_for_display(
@@ -389,7 +389,7 @@ impl AppWindow {
     }
 
     fn show_about(&self) {
-        DecrypteetAbout::show(self);
+        DecryptItAbout::show(self);
     }
 
     fn show_help_overlay(&self) {

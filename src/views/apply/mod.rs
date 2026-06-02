@@ -20,7 +20,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Decrypteet/ui/views/apply/mod.ui")]
+    #[template(resource = "/dev/deimoshall/DecryptIt/ui/views/apply/mod.ui")]
     pub struct Apply {
         #[template_child]
         pub image_stack: TemplateChild<adw::ViewStack>,

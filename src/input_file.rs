@@ -27,7 +27,7 @@ mod imp {
 
     #[::glib::object_subclass]
     impl ObjectSubclass for InputFile {
-        const NAME: &'static str = "DecrypteetInputFile";
+        const NAME: &'static str = "DecryptItInputFile";
         type Type = crate::input_file::InputFile;
 
         fn new() -> Self {

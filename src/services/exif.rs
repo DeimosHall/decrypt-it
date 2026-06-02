@@ -170,7 +170,7 @@ impl<'a> ExifService<'a> {
 
     /// Sets the ProcessingSoftware tag
     pub fn set_software(&self) -> Result<(), ExifToolError> {
-        let software = format!("Decrypteet {}", env!("CARGO_PKG_VERSION"));
+        let software = format!("Decrypt It {}", env!("CARGO_PKG_VERSION"));
         // self.write_tag("Software", software.as_str())?;
         self.write_tag("ProcessingSoftware", software.as_str())?;
         Ok(())

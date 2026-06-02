@@ -6,7 +6,7 @@ if [ -d "$BUILD_DIR" ]; then
 fi
 
 meson translation-build
-meson compile -C translation-build decrypteet-pot
-# meson compile -C translation-build decrypteet-update-po
+meson compile -C translation-build decrypt-it-pot
+# meson compile -C translation-build decrypt-it-update-po
 
 rm -r translation-build

@@ -1,7 +1,7 @@
 use std::slice::Iter;
 
 #[derive(Clone, Copy, Debug, glib::Enum, PartialEq, Default, Eq, Hash)]
-#[enum_type(name = "DecrypteetFiletype")]
+#[enum_type(name = "DecryptItFiletype")]
 pub enum FileType {
     #[enum_value(name = "PNG")]
     Png,
@@ -202,7 +202,7 @@ impl FileType {
 }
 
 #[derive(Clone, Copy, Debug, glib::Enum, PartialEq, Eq, Hash)]
-#[enum_type(name = "DecrypteetCompressionType")]
+#[enum_type(name = "DecryptItCompressionType")]
 pub enum CompressionType {
     #[enum_value(name = "ZIP")]
     Zip,

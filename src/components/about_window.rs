@@ -9,12 +9,12 @@ use gtk::License;
 pub const DEVELOPERS: &[&str] = &["Deimos Hall <deimoshall@proton.me>"];
 
 #[derive(Clone, Debug)]
-pub struct DecrypteetAbout;
+pub struct DecryptItAbout;
 
-impl DecrypteetAbout {
+impl DecryptItAbout {
     pub fn show<W: IsA<gtk::Widget>>(window: &W) {
         let about = adw::AboutDialog::from_appdata(
-            "/dev/deimoshall/Decrypteet/dev.deimoshall.Decrypteet.metainfo.xml",
+            "/dev/deimoshall/DecryptIt/dev.deimoshall.DecryptIt.metainfo.xml",
             Some(crate::config::VERSION),
         );
         about.set_developers(DEVELOPERS);

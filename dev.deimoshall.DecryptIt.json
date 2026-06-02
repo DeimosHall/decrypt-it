@@ -1,12 +1,12 @@
 {
-    "app-id": "dev.deimoshall.Decrypteet",
+    "app-id": "dev.deimoshall.DecryptIt",
     "runtime": "org.gnome.Platform",
     "runtime-version": "50",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "command": "decrypteet",
+    "command": "decrypt-it",
     "finish-args": [
         "--share=ipc",
         "--socket=fallback-x11",
@@ -154,7 +154,7 @@
             ]
         },
         {
-            "name": "decrypteet",
+            "name": "decrypt-it",
             "builddir": true,
             "buildsystem": "meson",
             "config-opts": [

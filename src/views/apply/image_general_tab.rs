@@ -12,7 +12,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Decrypteet/ui/views/apply/image_general_tab.ui")]
+    #[template(resource = "/dev/deimoshall/DecryptIt/ui/views/apply/image_general_tab.ui")]
     pub struct ImageGeneralTab {
         #[template_child]
         pub creation_date_entry: TemplateChild<gtk::Entry>,

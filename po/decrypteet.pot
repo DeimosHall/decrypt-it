@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the decrypteet package.
+# This file is distributed under the same license as the decrypt-it package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #: data/resources/blueprints/window.blp:144
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: decrypteet\n"
+"Project-Id-Version: decrypt-it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-24 18:42-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -18,158 +18,158 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/dev.deimoshall.Decrypteet.desktop.in.in:2
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:5
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:2
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:58 src/main.rs:46
-msgid "Decrypteet"
+msgid "Decrypt It"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.desktop.in.in:3
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:3
 msgid "EXIF Editor"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.desktop.in.in:4
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:4
 msgid "Edit EXIF metadata"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.desktop.in.in:10
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:10
 msgid "metadata;image;edit;exif"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.desktop.in.in:20
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:20
 #: data/resources/blueprints/window.blp:536
 msgid "New Window"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.gschema.xml.in:26
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:26
 msgid "Window width"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.gschema.xml.in:30
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:30
 msgid "Image quality"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.gschema.xml.in:34
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:34
 msgid "Image density per inch"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.gschema.xml.in:38
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:38
 msgid "Window height"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.gschema.xml.in:42
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:42
 msgid "Window maximized state"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.gschema.xml.in:46
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:46
 msgid "Output format"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.gschema.xml.in:50
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:50
 msgid "Compression format"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:9
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:9
 msgid "Edit metadata"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:15
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:15
 msgid ""
-"Decrypteet helps you edit EXIF metadata in images. Simply drag and drop "
+"Decrypt It helps you edit EXIF metadata in images. Simply drag and drop "
 "files or paste images directly into the app to get started."
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:19
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:19
 msgid "Supports JPEG, HEIC, AVIF, WebP, and many more image formats."
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:30
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:30
 msgid "exif"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:31
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:31
 msgid "metadata"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:32
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:32
 msgid "image"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:33
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:33
 msgid "video"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:34
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:34
 msgid "audio"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:35
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:35
 msgid "edit"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:36
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:36
 msgid "tag"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:37
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:37
 msgid "jpeg"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:38
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:38
 msgid "png"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:39
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:39
 msgid "heic"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:40
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:40
 msgid "pdf"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:65
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:65
 msgid "Reading metadata from an image (light mode)"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:70
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:70
 msgid "Reading metadata from an image (dark mode)"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:92
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:92
 msgid "Add description field"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:97
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:97
 msgid "Update runtime to GNOME 50"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:102
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:102
 msgid "Fix ExifTool execution fail due to Perl interpreter not available"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:107
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:107
 msgid "Initial release with core features:"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:109
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:109
 msgid "Edit EXIF metadata in images"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:110
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:110
 msgid "Support for images (only JPEG tested)"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:111
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:111
 msgid "View and modify create date"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:112
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:112
 msgid "Set offset time for date values"
 msgstr ""
 
-#: data/dev.deimoshall.Decrypteet.metainfo.xml.in.in:113
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:113
 msgid "Write processing software tag"
 msgstr ""
 
@@ -377,7 +377,7 @@ msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: data/resources/blueprints/window.blp:553
-msgid "About Decrypteet"
+msgid "About Decrypt It"
 msgstr ""
 
 #: src/file_chooser.rs:39 src/window.rs:2295

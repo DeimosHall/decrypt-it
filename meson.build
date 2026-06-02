@@ -1,4 +1,4 @@
-project('decrypteet',
+project('decrypt-it',
   'rust',
   version: '0.4.0',
   meson_version: '>= 1.4.0',
@@ -9,7 +9,7 @@ fs = import('fs')
 i18n = import('i18n')
 gnome = import('gnome')
 
-base_id = 'dev.deimoshall.Decrypteet'
+base_id = 'dev.deimoshall.DecryptIt'
 
 dependency('gtk4', version: '>= 4.6.0')
 dependency('libadwaita-1')
