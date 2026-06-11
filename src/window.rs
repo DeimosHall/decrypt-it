@@ -6,7 +6,6 @@ use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
-use crate::magick::{JobFile, count_frames};
 use crate::runtime;
 use crate::services::exif::ExifService;
 use adw::prelude::*;
@@ -49,7 +48,7 @@ mod imp {
         sync::atomic::AtomicBool,
     };
 
-    use crate::{config::PKGDATADIR, views::apply::Apply};
+    use crate::{config::PKGDATADIR};
 
     use super::*;
 
@@ -77,8 +76,6 @@ mod imp {
         pub loading_spinner: TemplateChild<gtk::Spinner>,
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
-        #[template_child]
-        pub apply_view: TemplateChild<Apply>,
         #[template_child]
         pub view_switcher: TemplateChild<adw::ViewSwitcher>,
 
@@ -222,15 +219,6 @@ impl AppWindow {
                     }
                 ))
                 .build(),
-            gio::ActionEntry::builder("exif")
-                .activate(clone!(
-                    #[weak(rename_to=window)]
-                    self,
-                    move |_, _, _| {
-                        window.test_exiftool();
-                    }
-                ))
-                .build(),
             gio::ActionEntry::builder("show-help-overlay")
                 .activate(clone!(
                     #[weak(rename_to=window)]
@@ -249,25 +237,12 @@ impl AppWindow {
                     }
                 ))
                 .build(),
-            gio::ActionEntry::builder("paste")
-                .activate(clone!(
-                    #[weak(rename_to=window)]
-                    self,
-                    move |_, _, _| {
-                        window.load_clipboard();
-                    }
-                ))
-                .build(),
         ]);
     }
 
     fn setup_callbacks(&self) {
         //load imp
         let imp = self.imp();
-
-        imp.view_switcher.set_stack(Some(&imp.apply_view.stack()));
-        
-        imp.apply_view.setup_tab_switch_listener();
 
         imp.open_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
@@ -300,60 +275,6 @@ impl AppWindow {
             self,
             move |_| {
                 this.apply_cancel();
-            }
-        ));
-
-        let apply_view = imp.apply_view.clone();
-
-        apply_view.clone().set_on_remove(clone!(
-            #[weak(rename_to=win)]
-            self,
-            move |_| {
-                win.switch_to_stack_welcome();
-            }
-        ));
-        
-        // TODO: check why going though here takes much time
-        apply_view.clone().set_on_apply(clone!(
-            #[weak(rename_to=win)]
-            self,
-            move |_| {
-                let path = win.files().first().unwrap().path();
-
-                // Disable loading screen by now
-                // TODO: implement it after batch processing
-                if false {
-                    win.switch_to_stack_applying();
-                    win.set_convert_progress(0, 1);
-                }
-
-                glib::spawn_future_local(clone!(
-                    #[weak(rename_to=win)]
-                    win,
-                    #[strong]
-                    apply_view,
-                    #[strong]
-                    path,
-                    async move {
-                        let result = apply_view.apply_changes(path);
-
-                        match result {
-                            Ok(()) => {
-                                if false {
-                                    win.set_convert_progress(1, 1);
-                                    win.switch_to_stack_apply();
-                                }
-                                win.show_toast(&gettext("Changes applied"));
-                            }
-                            Err(errors) => {
-                                // TODO: use the right dialog
-                                for error in errors {
-                                    win.show_toast(&format!("{}", error));
-                                }
-                            }
-                        }
-                    }
-                ));
             }
         ));
     }
@@ -442,42 +363,6 @@ impl AppWindow {
             .set_fraction((done as f64) / (total as f64));
     }
 
-    pub fn load_clipboard(&self) {
-        let clipboard = self.clipboard();
-        if clipboard.formats().contain_mime_type("image/png") {
-            MainContext::default().spawn_local(clone!(
-                #[weak(rename_to=this)]
-                self,
-                async move {
-                    let t = clipboard.read_texture_future().await;
-                    if let Ok(Some(t)) = t {
-                        let interim = JobFile::from_clipboard();
-                        t.save_to_png(interim.as_filename()).ok();
-                        let file =
-                            InputFile::new(&gio::File::for_path(interim.as_filename())).unwrap();
-                        this.open_success(vec![file]);
-                    }
-                }
-            ));
-        } else if clipboard
-            .formats()
-            .contain_mime_type("application/vnd.portal.files")
-        {
-            MainContext::default().spawn_local(clone!(
-                #[weak(rename_to=this)]
-                self,
-                async move {
-                    let t = clipboard.read_text_future().await.unwrap().unwrap();
-                    let files = t
-                        .lines()
-                        .flat_map(|p| InputFile::new(&gio::File::for_path(p)))
-                        .collect();
-                    this.open_success(files);
-                }
-            ));
-        }
-    }
-
     fn open_success(&self, mut files: Vec<InputFile>) {
         let prev_files = self.active_files();
         let prev_files_paths = prev_files.iter().map(|f| f.path()).collect_vec();
@@ -502,75 +387,9 @@ impl AppWindow {
             self.imp().input_file_store.append(file);
         }
 
+        println!("File name: {}", files.first().unwrap().path());
+
         let _ = fdlimit::raise_fd_limit();
-
-        self.load_frames();
-    }
-
-    fn load_frames(&self) {
-        let files = self.files();
-        let file_paths = files.iter().map(|f| f.path()).collect_vec();
-
-        let (sender, receiver) = async_channel::bounded(1);
-
-        std::thread::spawn(move || {
-            let jobs = file_paths
-                .into_iter()
-                .map(|f| async move { count_frames(f).await.unwrap_or((1, None)) })
-                .collect_vec();
-
-            let res = runtime().block_on(join_all(jobs));
-
-            sender.send_blocking(res).expect("Concurrency Issues");
-        });
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
-            self,
-            async move {
-                if let Ok(image_info) = receiver.recv().await {
-                    let real_files = files.clone();
-                    for (f, (frame, dims)) in real_files.iter().zip(image_info.iter()) {
-                        f.set_frames(*frame);
-                        let dims = *dims;
-                        idle_add_local_once(clone!(
-                            #[weak(rename_to=ff)]
-                            f,
-                            move || {
-                                if let Some((width, height)) = dims {
-                                    ff.set_width(width);
-                                    ff.set_height(height);
-                                }
-                            }
-                        ));
-                        glib::MainContext::default().iteration(true);
-                    }
-                    idle_add_local_once(clone!(
-                        #[weak(rename_to=these)]
-                        this,
-                        move || {
-                            these.load_pixbuf();
-                        }
-                    ));
-                }
-            }
-        ));
-    }
-
-    fn test_exiftool(&self) {
-        println!("Testing exiftool");
-        let paths = self.files().iter().map(|f| f.path()).collect_vec();
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=_this)]
-            self,
-            async move {
-                for path in paths {
-                    let exif = ExifService::new(&path);
-                    exif.read_all();
-                }
-            }
-        ));
     }
 
     pub fn clear(&self) {
@@ -619,13 +438,9 @@ impl AppWindow {
         }
 
         let file = self.files().first().unwrap().clone();
-        self.imp().apply_view.update_thumbnail(file);
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
-        self.imp()
-            .apply_view
-            .load_from_file(path);
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {

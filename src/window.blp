@@ -102,9 +102,10 @@ template $AppWindow: Adw.ApplicationWindow {
 
                   StackPage {
                     name: "stack_apply";
-                    child: $ApplyView apply_view { };
+
+                    child: Gtk.Box {};
                   }
-                  
+
                   StackPage {
                     name: "stack_invalid_image";
 
