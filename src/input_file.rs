@@ -120,7 +120,11 @@ impl InputFile {
 
         let mimetype = file_info.content_type().unwrap().as_str().to_owned();
 
-        let extension = FileType::from_mimetype(&mimetype);
+        let extension = FileType::from_mimetype(&mimetype).or_else(|| {
+            path.extension()
+                .and_then(|ext| ext.to_str())
+                .and_then(FileType::from_string)
+        });
 
         extension.map(|extension| {
             glib::Object::builder::<Self>()

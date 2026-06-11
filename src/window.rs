@@ -9,6 +9,7 @@ use crate::input_file::InputFile;
 use crate::runtime;
 use crate::services::exif::ExifService;
 use adw::prelude::*;
+use dlc_decoder::DlcDecoder;
 use futures::future::join_all;
 use gettextrs::gettext;
 use glib::{MainContext, clone, idle_add_local_once};
@@ -48,7 +49,7 @@ mod imp {
         sync::atomic::AtomicBool,
     };
 
-    use crate::{config::PKGDATADIR};
+    use crate::config::PKGDATADIR;
 
     use super::*;
 
@@ -76,6 +77,11 @@ mod imp {
         pub loading_spinner: TemplateChild<gtk::Spinner>,
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
+        #[template_child]
+        pub file_name: TemplateChild<adw::PreferencesGroup>,
+        #[template_child]
+        pub file_content: TemplateChild<adw::ActionRow>,
+        // TODO: delete
         #[template_child]
         pub view_switcher: TemplateChild<adw::ViewSwitcher>,
 
@@ -251,7 +257,7 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
-        
+
         imp.add_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
@@ -259,16 +265,6 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
-
-        // imp.image_container.set_filter_func(clone!(
-        //     #[weak(rename_to=this)]
-        //     self,
-        //     #[upgrade_or_default]
-        //     move |f| {
-        //         return (f.index() as usize) >= this.imp().elements.get()
-        //             || !this.imp().removed.borrow().contains(&(f.index() as u32));
-        //     }
-        // ));
 
         imp.cancel_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
@@ -363,6 +359,17 @@ impl AppWindow {
             .set_fraction((done as f64) / (total as f64));
     }
 
+    fn decrypt(&self, files: Vec<InputFile>) {
+        let decoder = DlcDecoder::new();
+        let dlc = decoder.from_file(files.first().unwrap().path());
+        let content = match dlc {
+            Ok(content) => content.password,
+            Err(error) => error.to_string(),
+        };
+
+        self.imp().file_content.set_title(&content);
+    }
+
     fn open_success(&self, mut files: Vec<InputFile>) {
         let prev_files = self.active_files();
         let prev_files_paths = prev_files.iter().map(|f| f.path()).collect_vec();
@@ -387,9 +394,13 @@ impl AppWindow {
             self.imp().input_file_store.append(file);
         }
 
-        println!("File name: {}", files.first().unwrap().path());
-
         let _ = fdlimit::raise_fd_limit();
+
+        self.switch_to_stack_apply();
+        self.imp()
+            .file_name
+            .set_title(&files.first().unwrap().path());
+        self.decrypt(files);
     }
 
     pub fn clear(&self) {
@@ -416,119 +427,8 @@ impl AppWindow {
             .collect_vec()
     }
 
-    fn load_pixbuf_finished(&self) {
-        let imp = self.imp();
-
-        let files_dims = self
-            .active_files()
-            .into_iter()
-            .map(|f| f.dimensions())
-            .unique()
-            .collect_vec();
-
-        if let Some((w, h)) = match files_dims[..] {
-            [Some(d)] => Some(d),
-            _ => None,
-        } {
-            imp.image_width.set(Some(w as u32));
-            imp.image_height.set(Some(h as u32));
-        } else {
-            imp.image_width.set(None);
-            imp.image_height.set(None);
-        }
-
-        let file = self.files().first().unwrap().clone();
-
-        self.switch_back_from_loading();
-        let path = self.files().first().unwrap().path();
-
-        if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
-        {
-            self.switch_to_stack_apply();
-        }
-    }
-
     fn files_count(&self) -> usize {
         (self.imp().input_file_store.n_items() as usize) - self.imp().removed.borrow().len()
-    }
-
-    fn load_pixbuf(&self) {
-        let files = self.active_files();
-
-        let file_path_things = files
-            .iter()
-            .map(|f| {
-                (
-                    f.kind().supports_pixbuf()
-                    // TODO: should I store full images or create downscale them to save memory?
-                        && f.area().map(|x| x < 8000 * 8000).unwrap_or_default(), // image isn't too big
-                    f.path(),
-                )
-            })
-            .scan(0, |i, (b, path)| {
-                // only load 10 images
-                if b {
-                    *i += 1;
-                }
-
-                if *i > 10 {
-                    Some((false, path))
-                } else {
-                    Some((b, path))
-                }
-            })
-            .collect_vec();
-
-        let (sender, receiver) = async_channel::bounded(1);
-        std::thread::spawn(move || {
-            let file_paths_pixbuf = file_path_things
-                .into_iter()
-                .enumerate()
-                .map(|(i, (b, path))| {
-                    let sender = sender.clone();
-                    async move {
-                        sender
-                            .send_blocking((
-                                i,
-                                match b {
-                                    true => Some(Texture::from_filename(&path)),
-                                    false => None,
-                                },
-                            ))
-                            .expect("Concurrency Issues");
-                    }
-                })
-                .collect_vec();
-
-            runtime().block_on(join_all(file_paths_pixbuf));
-        });
-
-        let completed = std::sync::Arc::new(AtomicUsize::new(0));
-        let total = self.files_count();
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
-            self,
-            async move {
-                while let Ok((i, p)) = receiver.recv().await {
-                    if let Some(Ok(p)) = p {
-                        this.imp()
-                            .input_file_store
-                            .item(i as u32)
-                            .and_downcast::<InputFile>()
-                            .unwrap()
-                            .set_pixbuf(p);
-                    }
-                    glib::MainContext::default().iteration(true);
-                    let c = completed.clone();
-                    let x = c.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-                    if x + 1 == total {
-                        this.load_pixbuf_finished();
-                        break;
-                    }
-                }
-            }
-        ));
     }
 }
 
