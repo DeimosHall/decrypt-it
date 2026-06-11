@@ -363,7 +363,7 @@ impl AppWindow {
         let decoder = DlcDecoder::new();
         let dlc = decoder.from_file(files.first().unwrap().path());
         let content = match dlc {
-            Ok(content) => content.password,
+            Ok(content) => content.files.first().unwrap().url.clone(),
             Err(error) => error.to_string(),
         };
 

@@ -33,7 +33,7 @@
 
     <requires>
         <display_length compare="ge">360</display_length>
-        <internet>online-only</internet>
+        <internet>always</internet>
     </requires>
 
     <branding>
