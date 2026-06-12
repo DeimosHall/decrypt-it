@@ -1,19 +1,14 @@
 use std::collections::HashSet;
-use std::sync::atomic::AtomicUsize;
 
 use crate::components::about_window::DecryptItAbout;
 use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
-use crate::runtime;
-use crate::services::exif::ExifService;
 use adw::prelude::*;
 use dlc_decoder::DlcDecoder;
-use futures::future::join_all;
 use gettextrs::gettext;
-use glib::{MainContext, clone, idle_add_local_once};
-use gtk::gdk::Texture;
+use glib::clone;
 use gtk::{gdk, gio, glib, subclass::prelude::*};
 use itertools::Itertools;
 use shared_child::SharedChild;
@@ -351,19 +346,10 @@ impl AppWindow {
         stop_converting_dialog.present(Some(self));
     }
 
-    fn set_convert_progress(&self, done: usize, total: usize) {
-        let msg = format!("{done}/{total}");
-        self.imp().progress_bar.set_text(Some(&msg));
-        self.imp()
-            .progress_bar
-            .set_fraction((done as f64) / (total as f64));
-    }
-
     fn decrypt(&self, files: Vec<InputFile>) {
         let decoder = DlcDecoder::new();
         let dlc = decoder.from_file(files.first().unwrap().path());
 
-        let url_group = &self.imp().url_group;
         let url_list_box = &self.imp().url_list_box;
         url_list_box.remove_all();
 
@@ -402,6 +388,9 @@ impl AppWindow {
     }
 
     fn open_success(&self, mut files: Vec<InputFile>) {
+        // TODO: Improve loading
+        self.switch_to_stack_loading_generally();
+
         let prev_files = self.active_files();
         let prev_files_paths = prev_files.iter().map(|f| f.path()).collect_vec();
         files = files
@@ -419,19 +408,17 @@ impl AppWindow {
         self.imp().input_file_store.remove_all();
         self.imp().removed.replace(HashSet::new());
 
-        self.switch_to_stack_loading_generally();
-
         for file in files.iter() {
             self.imp().input_file_store.append(file);
         }
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.switch_to_stack_apply();
         self.imp()
             .url_group
             .set_title(&files.first().unwrap().path());
         self.decrypt(files);
+        self.switch_to_stack_apply();
     }
 
     pub fn clear(&self) {
@@ -457,10 +444,6 @@ impl AppWindow {
             .flatten()
             .collect_vec()
     }
-
-    fn files_count(&self) -> usize {
-        (self.imp().input_file_store.n_items() as usize) - self.imp().removed.borrow().len()
-    }
 }
 
 pub trait FileOperations {
@@ -473,11 +456,9 @@ pub trait FileOperations {
 
 trait StackNavigation {
     fn switch_to_stack_apply(&self);
-    fn switch_to_stack_applying(&self);
     fn switch_to_stack_welcome(&self);
     fn switch_to_stack_invalid_image(&self);
     fn switch_to_stack_loading(&self);
-    fn switch_back_from_loading(&self);
     fn switch_to_stack_loading_generally(&self);
 }
 
@@ -501,12 +482,6 @@ impl StackNavigation for AppWindow {
         self.imp().stack.set_visible_child_name("stack_apply");
     }
 
-    fn switch_to_stack_applying(&self) {
-        self.imp().add_button.set_visible(false);
-        self.imp().view_switcher.set_visible(false);
-        self.imp().stack.set_visible_child_name("stack_applying");
-    }
-
     fn switch_to_stack_welcome(&self) {
         self.imp().add_button.set_visible(false);
         self.imp().view_switcher.set_visible(false);
@@ -528,10 +503,6 @@ impl StackNavigation for AppWindow {
         self.imp().view_switcher.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_loading");
         self.imp().loading_spinner.start();
-    }
-
-    fn switch_back_from_loading(&self) {
-        self.imp().loading_spinner.stop();
     }
 
     fn switch_to_stack_loading_generally(&self) {

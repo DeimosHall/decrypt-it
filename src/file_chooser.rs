@@ -5,7 +5,6 @@ use glib::clone;
 use gtk::{gio, prelude::*};
 
 use crate::input_file::InputFile;
-use crate::models::filetypes::FileType;
 use crate::window::AppWindow;
 
 pub struct FileChooser;

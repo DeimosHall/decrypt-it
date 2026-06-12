@@ -6,7 +6,6 @@ mod components;
 mod file_chooser;
 mod input_file;
 mod models;
-mod services;
 mod window;
 
 use std::sync::OnceLock;
