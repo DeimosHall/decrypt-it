@@ -78,9 +78,9 @@ mod imp {
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
-        pub file_name: TemplateChild<adw::PreferencesGroup>,
+        pub url_group: TemplateChild<adw::PreferencesGroup>,
         #[template_child]
-        pub file_content: TemplateChild<adw::ActionRow>,
+        pub url_list_box: TemplateChild<gtk::ListBox>,
         // TODO: delete
         #[template_child]
         pub view_switcher: TemplateChild<adw::ViewSwitcher>,
@@ -362,12 +362,43 @@ impl AppWindow {
     fn decrypt(&self, files: Vec<InputFile>) {
         let decoder = DlcDecoder::new();
         let dlc = decoder.from_file(files.first().unwrap().path());
-        let content = match dlc {
-            Ok(content) => content.files.first().unwrap().url.clone(),
-            Err(error) => error.to_string(),
-        };
 
-        self.imp().file_content.set_title(&content);
+        let url_group = &self.imp().url_group;
+        let url_list_box = &self.imp().url_list_box;
+        url_list_box.remove_all();
+
+        match dlc {
+            Ok(package) => {
+                let urls: Vec<String> = package
+                    .files
+                    .iter()
+                    .filter_map(|link| Some(link.url.clone()))
+                    .collect();
+
+                for url in urls {
+                    let row = adw::ActionRow::builder()
+                        .title(url.clone())
+                        .selectable(true)
+                        .build();
+
+                    let copy_button = gtk::Button::builder()
+                        .icon_name("edit-copy-symbolic")
+                        .css_classes(vec!["flat".to_string()])
+                        .build();
+
+                    let url_clone = url.clone();
+                    copy_button.connect_clicked(move |button| {
+                        let clipboard = button.clipboard();
+                        clipboard.set_text(&url_clone);
+                    });
+
+                    row.add_suffix(&copy_button);
+
+                    url_list_box.append(&row);
+                }
+            }
+            Err(error) => self.show_toast(&error.to_string()),
+        };
     }
 
     fn open_success(&self, mut files: Vec<InputFile>) {
@@ -398,7 +429,7 @@ impl AppWindow {
 
         self.switch_to_stack_apply();
         self.imp()
-            .file_name
+            .url_group
             .set_title(&files.first().unwrap().path());
         self.decrypt(files);
     }

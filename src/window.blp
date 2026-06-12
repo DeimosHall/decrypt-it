@@ -105,11 +105,17 @@ template $AppWindow: Adw.ApplicationWindow {
 
                     child: Adw.Bin {
                       Adw.PreferencesPage {
-                        Adw.PreferencesGroup file_name {
+                        title: _("Title");
+
+                        Adw.PreferencesGroup url_group {
                           title: _("File name here");
 
-                          Adw.ActionRow file_content {
-                            title: _("Content");
+                          Gtk.ListBox url_list_box {
+                            selection-mode: none;
+
+                            styles [
+                              "boxed-list",
+                            ]
                           }
                         }
                       }
