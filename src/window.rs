@@ -346,45 +346,71 @@ impl AppWindow {
         stop_converting_dialog.present(Some(self));
     }
 
-    fn decrypt(&self, files: Vec<InputFile>) {
+    fn decrypt(&self, file: InputFile) -> Result<(String, Vec<String>), dlc_decoder::Error> {
         let decoder = DlcDecoder::new();
-        let dlc = decoder.from_file(files.first().unwrap().path());
+        let package = decoder.from_file(file.path())?;
 
+        let urls: Vec<String> = package
+            .files
+            .iter()
+            .filter_map(|link| Some(link.url.clone()))
+            .collect();
+
+        let password = package.password;
+
+        Ok((password, urls))
+    }
+
+    fn display_row(&self, text: String) {
         let url_list_box = &self.imp().url_list_box;
-        url_list_box.remove_all();
 
-        match dlc {
-            Ok(package) => {
-                let urls: Vec<String> = package
-                    .files
-                    .iter()
-                    .filter_map(|link| Some(link.url.clone()))
-                    .collect();
+        let row = adw::ActionRow::builder()
+            .title(&text)
+            .selectable(true)
+            .build();
 
-                for url in urls {
-                    let row = adw::ActionRow::builder()
-                        .title(url.clone())
-                        .selectable(true)
-                        .build();
+        let copy_button = gtk::Button::builder()
+            .icon_name("edit-copy-symbolic")
+            .css_classes(vec!["flat".to_string()])
+            .build();
 
-                    let copy_button = gtk::Button::builder()
-                        .icon_name("edit-copy-symbolic")
-                        .css_classes(vec!["flat".to_string()])
-                        .build();
+        let text_clone = text.clone();
+        copy_button.connect_clicked(move |button| {
+            let clipboard = button.clipboard();
+            clipboard.set_text(&text_clone);
+        });
 
-                    let url_clone = url.clone();
-                    copy_button.connect_clicked(move |button| {
-                        let clipboard = button.clipboard();
-                        clipboard.set_text(&url_clone);
-                    });
+        row.add_suffix(&copy_button);
+        url_list_box.append(&row);
+    }
 
-                    row.add_suffix(&copy_button);
+    fn display_urls(&self, files: Vec<InputFile>) {
+        self.imp()
+            .url_group
+            .set_title(&files.first().unwrap().path());
 
-                    url_list_box.append(&row);
+        // Clean previous urls
+        self.imp().url_list_box.remove_all();
+
+        for file in files {
+            match self.decrypt(file) {
+                Ok((password, urls)) => {
+                    // TODO: separate password to a different group in the UI
+                    if password.is_empty() {
+                        self.display_row(gettext("No password available"));
+                    } else {
+                        self.display_row(password);
+                    }
+
+                    for url in urls {
+                        self.display_row(url.clone());
+                    }
+                }
+                Err(err) => {
+                    self.show_toast(&err.to_string());
                 }
             }
-            Err(error) => self.show_toast(&error.to_string()),
-        };
+        }
     }
 
     fn open_success(&self, mut files: Vec<InputFile>) {
@@ -414,10 +440,7 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.imp()
-            .url_group
-            .set_title(&files.first().unwrap().path());
-        self.decrypt(files);
+        self.display_urls(files);
         self.switch_to_stack_apply();
     }
 
