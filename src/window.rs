@@ -39,10 +39,7 @@ impl ResizeFilter {
 }
 
 mod imp {
-    use std::{
-        cell::{Cell, RefCell},
-        sync::atomic::AtomicBool,
-    };
+    use std::cell::{Cell, RefCell};
 
     use crate::config::PKGDATADIR;
 
@@ -67,18 +64,11 @@ mod imp {
         #[template_child]
         pub add_button: TemplateChild<gtk::Button>,
         #[template_child]
-        pub cancel_button: TemplateChild<gtk::Button>,
-        #[template_child]
         pub loading_spinner: TemplateChild<gtk::Spinner>,
-        #[template_child]
-        pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
         pub url_group: TemplateChild<adw::PreferencesGroup>,
         #[template_child]
         pub url_list_box: TemplateChild<gtk::ListBox>,
-        // TODO: delete
-        #[template_child]
-        pub view_switcher: TemplateChild<adw::ViewSwitcher>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
@@ -89,8 +79,6 @@ mod imp {
         pub input_file_store: gio::ListStore,
         #[derivative(Default(value = "gio::Settings::new(APP_ID)"))]
         pub settings: gio::Settings,
-        #[derivative(Default(value = "std::sync::Arc::new(AtomicBool::new(true))"))]
-        pub is_canceled: std::sync::Arc<AtomicBool>,
         pub current_jobs: RefCell<Vec<Arc<SharedChild>>>,
         pub image_width: Cell<Option<u32>>,
         pub image_height: Cell<Option<u32>>,
@@ -151,13 +139,7 @@ mod imp {
                 dbg!("Failed to save window state, {}", &err);
             }
 
-            if !self.is_canceled.load(std::sync::atomic::Ordering::SeqCst) {
-                self.obj().close_dialog();
-                glib::Propagation::Stop
-            } else {
-                // Pass close request on to the parent
-                self.parent_close_request()
-            }
+            self.parent_close_request()
         }
     }
 
@@ -186,11 +168,6 @@ impl AppWindow {
         win
     }
 
-    /// Shows a basic toast with the given text.
-    fn show_toast(&self, text: &str) {
-        self.imp().toast_overlay.add_toast(adw::Toast::new(text));
-    }
-
     fn setup_gactions(&self) {
         self.add_action_entries([
             gio::ActionEntry::builder("close")
@@ -208,15 +185,6 @@ impl AppWindow {
                     self,
                     move |_, _, _| {
                         window.add_dialog();
-                    }
-                ))
-                .build(),
-            gio::ActionEntry::builder("clear")
-                .activate(clone!(
-                    #[weak(rename_to=window)]
-                    self,
-                    move |_, _, _| {
-                        window.clear();
                     }
                 ))
                 .build(),
@@ -260,14 +228,6 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
-
-        imp.cancel_button.connect_clicked(clone!(
-            #[weak(rename_to=this)]
-            self,
-            move |_| {
-                this.apply_cancel();
-            }
-        ));
     }
 
     fn setup_drop_target(&self) {
@@ -306,44 +266,6 @@ impl AppWindow {
 
     fn show_help_overlay(&self) {
         self.imp().help_overlay.present(Some(self));
-    }
-
-    fn close_dialog(&self) {
-        let stop_converting_dialog = adw::AlertDialog::new(
-            Some(&gettext("Stop converting?")),
-            Some(&gettext("You will lose all progress.")),
-        );
-
-        stop_converting_dialog.add_response("cancel", &gettext("_Cancel"));
-        stop_converting_dialog.add_response("stop", &gettext("_Stop"));
-        stop_converting_dialog
-            .set_response_appearance("stop", adw::ResponseAppearance::Destructive);
-        stop_converting_dialog.connect_response(
-            None,
-            clone!(
-                #[weak(rename_to=this)]
-                self,
-                move |_, response_id| {
-                    if response_id == "stop" {
-                        this.imp()
-                            .is_canceled
-                            .store(true, std::sync::atomic::Ordering::SeqCst);
-                        let mut current_jobs = this.imp().current_jobs.borrow_mut();
-                        for x in current_jobs.iter() {
-                            match x.kill() {
-                                Ok(_) => {}
-                                Err(_) => {
-                                    x.wait().ok();
-                                }
-                            }
-                        }
-                        current_jobs.clear();
-                        this.close();
-                    }
-                }
-            ),
-        );
-        stop_converting_dialog.present(Some(self));
     }
 
     fn decrypt(&self, file: InputFile) -> Result<(String, Vec<String>), dlc_decoder::Error> {
@@ -397,7 +319,7 @@ impl AppWindow {
                 Ok((password, urls)) => {
                     // TODO: separate password to a different group in the UI
                     if password.is_empty() {
-                        self.display_row(gettext("No password available"));
+                        self.display_row(gettext("No password found"));
                     } else {
                         self.display_row(password);
                     }
@@ -444,12 +366,6 @@ impl AppWindow {
         self.switch_to_stack_apply();
     }
 
-    pub fn clear(&self) {
-        self.imp().input_file_store.remove_all();
-
-        self.switch_to_stack_welcome();
-    }
-
     fn active_files(&self) -> Vec<InputFile> {
         let removed = self.imp().removed.borrow().clone();
         self.files()
@@ -479,14 +395,14 @@ pub trait FileOperations {
 
 trait StackNavigation {
     fn switch_to_stack_apply(&self);
-    fn switch_to_stack_welcome(&self);
     fn switch_to_stack_invalid_image(&self);
     fn switch_to_stack_loading(&self);
     fn switch_to_stack_loading_generally(&self);
 }
 
 pub trait WindowUI {
-    fn apply_cancel(&self);
+    /// Shows a basic toast with the given text.
+    fn show_toast(&self, text: &str);
 }
 
 trait SettingsStore {
@@ -495,27 +411,19 @@ trait SettingsStore {
 }
 
 impl WindowUI for AppWindow {
-    fn apply_cancel(&self) {}
+    fn show_toast(&self, text: &str) {
+        self.imp().toast_overlay.add_toast(adw::Toast::new(text));
+    }
 }
 
 impl StackNavigation for AppWindow {
     fn switch_to_stack_apply(&self) {
         self.imp().add_button.set_visible(true);
-        self.imp().view_switcher.set_visible(true);
         self.imp().stack.set_visible_child_name("stack_apply");
-    }
-
-    fn switch_to_stack_welcome(&self) {
-        self.imp().add_button.set_visible(false);
-        self.imp().view_switcher.set_visible(false);
-        self.imp()
-            .stack
-            .set_visible_child_name("stack_welcome_page");
     }
 
     fn switch_to_stack_invalid_image(&self) {
         self.imp().add_button.set_visible(false);
-        self.imp().view_switcher.set_visible(false);
         self.imp()
             .stack
             .set_visible_child_name("stack_invalid_image");
@@ -523,7 +431,6 @@ impl StackNavigation for AppWindow {
 
     fn switch_to_stack_loading(&self) {
         self.imp().add_button.set_visible(false);
-        self.imp().view_switcher.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_loading");
         self.imp().loading_spinner.start();
     }

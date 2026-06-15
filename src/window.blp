@@ -33,12 +33,6 @@ template $AppWindow: Adw.ApplicationWindow {
                   ]
                 }
 
-                [title]
-                Adw.ViewSwitcher view_switcher {
-                  visible: false; // Don't show at startup
-                  policy: wide;
-                }
-
                 [end]
                 MenuButton {
                   icon-name: "open-menu-symbolic";
@@ -60,7 +54,7 @@ template $AppWindow: Adw.ApplicationWindow {
                     child: Adw.StatusPage {
                       icon-name: "dev.deimoshall.DecryptIt";
                       title: _("Decrypt It");
-                      description: _("Drag and drop images here");
+                      description: _("Drag and drop files here");
                       hexpand: true;
                       vexpand: true;
 
@@ -71,7 +65,7 @@ template $AppWindow: Adw.ApplicationWindow {
                         Button open_button {
                           valign: center;
                           halign: center;
-                          label: _("_Open Images…");
+                          label: _("_Open Files…");
                           use-underline: true;
 
                           styles [
@@ -131,39 +125,6 @@ template $AppWindow: Adw.ApplicationWindow {
                       description: _("This image could be corrupted or may use an unsupported file format.");
                       hexpand: true;
                       vexpand: true;
-                    };
-                  }
-
-                  StackPage {
-                    name: "stack_applying";
-
-                    child: Adw.StatusPage {
-                      title: _("Applying");
-                      description: _("This could take a while");
-
-                      Box {
-                        orientation: vertical;
-                        spacing: 36;
-
-                        ProgressBar progress_bar {
-                          valign: center;
-                          halign: center;
-                          show-text: true;
-                          text: _("Loading…");
-                        }
-
-                        Button cancel_button {
-                          valign: center;
-                          halign: center;
-                          label: _("_Cancel");
-                          use-underline: true;
-
-                          styles [
-                            "destructive-action",
-                            "pill",
-                          ]
-                        }
-                      }
                     };
                   }
                 }
