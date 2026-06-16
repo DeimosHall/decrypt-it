@@ -66,7 +66,7 @@ mod imp {
         #[template_child]
         pub loading_spinner: TemplateChild<gtk::Spinner>,
         #[template_child]
-        pub url_group: TemplateChild<adw::PreferencesGroup>,
+        pub password_container: TemplateChild<gtk::ListBox>,
         #[template_child]
         pub url_list_box: TemplateChild<gtk::ListBox>,
 
@@ -283,10 +283,8 @@ impl AppWindow {
         Ok((password, urls))
     }
 
-    fn display_row(&self, text: String) {
-        let url_list_box = &self.imp().url_list_box;
-
-        let row = adw::ActionRow::builder()
+    fn display_url(&self, text: String) {
+        let url_field = adw::ActionRow::builder()
             .title(&text)
             .selectable(true)
             .build();
@@ -302,30 +300,46 @@ impl AppWindow {
             clipboard.set_text(&text_clone);
         });
 
-        row.add_suffix(&copy_button);
-        url_list_box.append(&row);
+        url_field.add_suffix(&copy_button);
+        self.imp().url_list_box.append(&url_field);
+    }
+
+    fn display_password(&self, password: String) {
+        let password_field = adw::ActionRow::builder()
+            .title(&password)
+            .selectable(true)
+            .build();
+
+        let copy_button = gtk::Button::builder()
+            .icon_name("edit-copy-symbolic")
+            .css_classes(vec!["flat".to_string()])
+            .build();
+
+        let password_clone = password.clone();
+        copy_button.connect_clicked(move |button| {
+            let clipboard = button.clipboard();
+            clipboard.set_text(&password_clone);
+        });
+
+        password_field.add_suffix(&copy_button);
+        self.imp().password_container.append(&password_field);
     }
 
     fn display_urls(&self, files: Vec<InputFile>) {
-        self.imp()
-            .url_group
-            .set_title(&files.first().unwrap().path());
-
         // Clean previous urls
         self.imp().url_list_box.remove_all();
 
         for file in files {
             match self.decrypt(file) {
                 Ok((password, urls)) => {
-                    // TODO: separate password to a different group in the UI
                     if password.is_empty() {
-                        self.display_row(gettext("No password found"));
+                        self.display_password(gettext("No password found"));
                     } else {
-                        self.display_row(password);
+                        self.display_password(password);
                     }
 
                     for url in urls {
-                        self.display_row(url.clone());
+                        self.display_url(url.clone());
                     }
                 }
                 Err(err) => {

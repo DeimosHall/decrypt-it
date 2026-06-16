@@ -101,8 +101,20 @@ template $AppWindow: Adw.ApplicationWindow {
                       Adw.PreferencesPage {
                         title: _("Title");
 
-                        Adw.PreferencesGroup url_group {
-                          title: _("File name here");
+                        Adw.PreferencesGroup {
+                          title: _("Password");
+
+                          Gtk.ListBox password_container {
+                            selection-mode: none;
+
+                            styles [
+                              "boxed-list",
+                            ]
+                          }
+                        }
+
+                        Adw.PreferencesGroup {
+                          title: _("URLs");
 
                           Gtk.ListBox url_list_box {
                             selection-mode: none;
