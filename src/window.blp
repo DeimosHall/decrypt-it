@@ -97,35 +97,7 @@ template $AppWindow: Adw.ApplicationWindow {
                   StackPage {
                     name: "stack_apply";
 
-                    child: Adw.Bin {
-                      Adw.PreferencesPage {
-                        title: _("Title");
-
-                        Adw.PreferencesGroup {
-                          title: _("Password");
-
-                          Gtk.ListBox password_container {
-                            selection-mode: none;
-
-                            styles [
-                              "boxed-list",
-                            ]
-                          }
-                        }
-
-                        Adw.PreferencesGroup {
-                          title: _("URLs");
-
-                          Gtk.ListBox url_list_box {
-                            selection-mode: none;
-
-                            styles [
-                              "boxed-list",
-                            ]
-                          }
-                        }
-                      }
-                    };
+                    child: $Decrypt decrypt_view {};
                   }
 
                   StackPage {

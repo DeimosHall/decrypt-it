@@ -41,7 +41,7 @@ impl ResizeFilter {
 mod imp {
     use std::cell::{Cell, RefCell};
 
-    use crate::config::PKGDATADIR;
+    use crate::{config::PKGDATADIR, views::decrypt::Decrypt};
 
     use super::*;
 
@@ -66,9 +66,7 @@ mod imp {
         #[template_child]
         pub loading_spinner: TemplateChild<gtk::Spinner>,
         #[template_child]
-        pub password_container: TemplateChild<gtk::ListBox>,
-        #[template_child]
-        pub url_list_box: TemplateChild<gtk::ListBox>,
+        pub decrypt_view: TemplateChild<Decrypt>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
@@ -295,7 +293,7 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.display_urls(files);
+        self.imp().decrypt_view.display_urls(files);
         self.switch_to_stack_apply();
     }
 
@@ -341,14 +339,6 @@ pub trait WindowUI {
 trait SettingsStore {
     fn save_window_size(&self) -> Result<(), glib::BoolError>;
     fn load_window_size(&self);
-}
-
-trait DecryptOperations {
-    fn decrypt(&self, file: InputFile) -> Result<(String, Vec<String>), dlc_decoder::Error>;
-    fn build_row(&self, text: String) -> adw::ActionRow;
-    fn display_url(&self, text: String);
-    fn display_password(&self, password: String);
-    fn display_urls(&self, files: Vec<InputFile>);
 }
 
 impl WindowUI for AppWindow {
@@ -444,77 +434,5 @@ impl FileOperations for AppWindow {
 
     fn add_success_wrapper(&self, files: Vec<InputFile>) {
         self.open_success(files);
-    }
-}
-
-impl DecryptOperations for AppWindow {
-    fn decrypt(&self, file: InputFile) -> Result<(String, Vec<String>), dlc_decoder::Error> {
-        let decoder = DlcDecoder::new();
-        let package = decoder.from_file(file.path())?;
-
-        let urls: Vec<String> = package
-            .files
-            .iter()
-            .filter_map(|link| Some(link.url.clone()))
-            .collect();
-
-        let password = package.password;
-
-        Ok((password, urls))
-    }
-
-    fn build_row(&self, text: String) -> adw::ActionRow {
-        let row = adw::ActionRow::builder()
-            .title(&text)
-            .selectable(true)
-            .build();
-
-        let copy_button = gtk::Button::builder()
-            .icon_name("edit-copy-symbolic")
-            .css_classes(vec!["flat".to_string()])
-            .build();
-
-        let text_clone = text.clone();
-        copy_button.connect_clicked(move |button| {
-            let clipboard = button.clipboard();
-            clipboard.set_text(&text_clone);
-        });
-
-        row.add_suffix(&copy_button);
-        row
-    }
-
-    fn display_url(&self, url: String) {
-        let url_field = self.build_row(url);
-        self.imp().url_list_box.append(&url_field);
-    }
-
-    fn display_password(&self, password: String) {
-        let password_field = self.build_row(password);
-        self.imp().password_container.append(&password_field);
-    }
-
-    fn display_urls(&self, files: Vec<InputFile>) {
-        // Clean previous urls
-        self.imp().url_list_box.remove_all();
-
-        for file in files {
-            match self.decrypt(file) {
-                Ok((password, urls)) => {
-                    if password.is_empty() {
-                        self.display_password(gettext("No password found"));
-                    } else {
-                        self.display_password(password);
-                    }
-
-                    for url in urls {
-                        self.display_url(url.clone());
-                    }
-                }
-                Err(err) => {
-                    self.show_toast(&err.to_string());
-                }
-            }
-        }
     }
 }

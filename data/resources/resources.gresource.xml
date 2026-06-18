@@ -11,6 +11,7 @@
 
     <gresource prefix="/dev/deimoshall/DecryptIt/ui/">
         <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">window.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/decrypt/mod.ui">views-decrypt-mod.ui</file>
     </gresource>
 
     <gresource prefix="/dev/deimoshall/DecryptIt/icons/scalable/apps/">
