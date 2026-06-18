@@ -3,12 +3,13 @@ use dlc_decoder::DlcDecoder;
 use gettextrs::gettext;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
-use crate::input_file::InputFile;
+use crate::{impl_view_host, input_file::InputFile, traits::ViewHost};
 
 mod imp {
-    use adw::subclass::bin::BinImpl;
+    use std::cell::RefCell;
 
     use super::*;
+    use adw::subclass::bin::BinImpl;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/dev/deimoshall/DecryptIt/ui/views/decrypt/mod.ui")]
@@ -17,6 +18,8 @@ mod imp {
         pub password_container: TemplateChild<gtk::ListBox>,
         #[template_child]
         pub url_list_box: TemplateChild<gtk::ListBox>,
+
+        pub view_host: RefCell<Option<Box<dyn ViewHost>>>,
     }
 
     #[glib::object_subclass]
@@ -117,9 +120,13 @@ impl Decrypt {
                 Err(err) => {
                     println!("Should handle error");
                     println!("{}", err);
-                    // self.show_toast(&err.to_string());
+                    self.show_toast(&err.to_string());
                 }
             }
         }
     }
 }
+
+// This expands to
+// impl Decrypt { show_toast() }
+impl_view_host!(Decrypt);

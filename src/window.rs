@@ -1,18 +1,15 @@
 use std::collections::HashSet;
 
-use crate::components::about_window::DecryptItAbout;
 use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
+use crate::{components::about_window::DecryptItAbout, traits::ViewHost};
 use adw::prelude::*;
-use dlc_decoder::DlcDecoder;
 use gettextrs::gettext;
 use glib::clone;
 use gtk::{gdk, gio, glib, subclass::prelude::*};
 use itertools::Itertools;
-use shared_child::SharedChild;
-use std::sync::Arc;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ResizeFilter {
@@ -77,9 +74,6 @@ mod imp {
         pub input_file_store: gio::ListStore,
         #[derivative(Default(value = "gio::Settings::new(APP_ID)"))]
         pub settings: gio::Settings,
-        pub current_jobs: RefCell<Vec<Arc<SharedChild>>>,
-        pub image_width: Cell<Option<u32>>,
-        pub image_height: Cell<Option<u32>>,
         pub removed: RefCell<HashSet<u32>>,
         pub elements: Cell<usize>,
     }
@@ -293,6 +287,9 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
+        self.imp()
+            .decrypt_view
+            .set_view_host(Box::new(self.clone()));
         self.imp().decrypt_view.display_urls(files);
         self.switch_to_stack_apply();
     }
@@ -331,17 +328,12 @@ trait StackNavigation {
     fn switch_to_stack_loading_generally(&self);
 }
 
-pub trait WindowUI {
-    /// Shows a basic toast with the given text.
-    fn show_toast(&self, text: &str);
-}
-
 trait SettingsStore {
     fn save_window_size(&self) -> Result<(), glib::BoolError>;
     fn load_window_size(&self);
 }
 
-impl WindowUI for AppWindow {
+impl ViewHost for AppWindow {
     fn show_toast(&self, text: &str) {
         self.imp().toast_overlay.add_toast(adw::Toast::new(text));
     }
