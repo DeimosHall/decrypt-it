@@ -3,15 +3,15 @@ use gettextrs::gettext;
 use glib::object::IsA;
 use gtk::License;
 
-//code 'inspired' by https://gitlab.com/news-flash/news_flash_gtk/-/blob/master/src/about_dialog.rs
+// Code 'inspired' by https://gitlab.com/news-flash/news_flash_gtk/-/blob/master/src/about_dialog.rs
 
-//this is non-translatable information, so it can be const
+// This is non-translatable information, so it can be const
 pub const DEVELOPERS: &[&str] = &["Deimos Hall <deimoshall@proton.me>"];
 
 #[derive(Clone, Debug)]
-pub struct DecryptItAbout;
+pub struct About;
 
-impl DecryptItAbout {
+impl About {
     pub fn show<W: IsA<gtk::Widget>>(window: &W) {
         let about = adw::AboutDialog::from_appdata(
             "/dev/deimoshall/DecryptIt/dev.deimoshall.DecryptIt.metainfo.xml",

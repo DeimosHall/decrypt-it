@@ -1,39 +1,15 @@
 use std::collections::HashSet;
 
-use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
-use crate::{components::about_window::DecryptItAbout, traits::ViewHost};
+use crate::traits::ViewHost;
+use crate::{components::drag_overlay::DragOverlay, views::about::About};
 use adw::prelude::*;
 use gettextrs::gettext;
 use glib::clone;
 use gtk::{gdk, gio, glib, subclass::prelude::*};
 use itertools::Itertools;
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum ResizeFilter {
-    Default,
-    Point,
-}
-
-#[allow(dead_code)]
-impl ResizeFilter {
-    pub fn as_display_string(&self) -> Option<&str> {
-        match self {
-            ResizeFilter::Default => None,
-            ResizeFilter::Point => Some("Point"),
-        }
-    }
-
-    pub fn from_index(index: usize) -> Option<Self> {
-        match index {
-            0 => Some(ResizeFilter::Default),
-            1 => Some(ResizeFilter::Point),
-            _ => None,
-        }
-    }
-}
 
 mod imp {
     use std::cell::{Cell, RefCell};
@@ -253,7 +229,7 @@ impl AppWindow {
     }
 
     fn show_about(&self) {
-        DecryptItAbout::show(self);
+        About::show(self);
     }
 
     fn show_help_overlay(&self) {
