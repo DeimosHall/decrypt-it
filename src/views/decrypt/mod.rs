@@ -99,7 +99,7 @@ impl Decrypt {
         self.imp().password_container.append(&password_field);
     }
 
-    pub fn display_urls(&self, files: Vec<InputFile>) {
+    pub fn display_urls(&self, files: Vec<InputFile>) -> Result<(), dlc_decoder::Error> {
         // Clean previous password and urls
         self.imp().url_list_box.remove_all();
         self.imp().password_container.remove_all();
@@ -117,13 +117,12 @@ impl Decrypt {
                         self.display_url(url.clone());
                     }
                 }
-                Err(err) => {
-                    println!("Should handle error");
-                    println!("{}", err);
-                    self.show_toast(&err.to_string());
-                }
+                // This works well for one file
+                Err(err) => return Err(err),
             }
         }
+
+        Ok(())
     }
 }
 

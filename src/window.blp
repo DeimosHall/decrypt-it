@@ -95,18 +95,18 @@ template $AppWindow: Adw.ApplicationWindow {
                   }
 
                   StackPage {
-                    name: "stack_apply";
+                    name: "stack_decrypt";
 
                     child: $Decrypt decrypt_view {};
                   }
 
                   StackPage {
-                    name: "stack_invalid_image";
+                    name: "stack_invalid_file";
 
-                    child: Adw.StatusPage invalid_image {
+                    child: Adw.StatusPage invalid_file {
                       icon-name: "im-symbolic";
-                      title: _("Could not Load Image");
-                      description: _("This image could be corrupted or may use an unsupported file format.");
+                      title: _("Could not decrypt file");
+                      description: _("This file could be corrupted or malformed.");
                       hexpand: true;
                       vexpand: true;
                     };

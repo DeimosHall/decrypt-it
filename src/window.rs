@@ -42,6 +42,9 @@ mod imp {
         pub decrypt_view: TemplateChild<Decrypt>,
 
         #[template_child]
+        pub invalid_file: TemplateChild<adw::StatusPage>,
+
+        #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
         #[template_child]
         pub help_overlay: TemplateChild<adw::ShortcutsDialog>,
@@ -237,9 +240,6 @@ impl AppWindow {
     }
 
     fn open_success(&self, mut files: Vec<InputFile>) {
-        // TODO: Improve loading
-        self.switch_to_stack_loading_generally();
-
         let prev_files = self.active_files();
         let prev_files_paths = prev_files.iter().map(|f| f.path()).collect_vec();
         files = files
@@ -266,8 +266,19 @@ impl AppWindow {
         self.imp()
             .decrypt_view
             .set_view_host(Box::new(self.clone()));
-        self.imp().decrypt_view.display_urls(files);
-        self.switch_to_stack_apply();
+
+        match self.imp().decrypt_view.display_urls(files) {
+            Ok(()) => {
+                self.switch_to_stack_decrypt();
+            }
+            Err(err) => {
+                self.imp()
+                    .invalid_file
+                    .set_description(Some(&err.to_string()));
+                self.show_toast(&gettext("Something went wrong"));
+                self.switch_to_stack_invalid_file();
+            }
+        }
     }
 
     fn active_files(&self) -> Vec<InputFile> {
@@ -298,10 +309,9 @@ pub trait FileOperations {
 }
 
 trait StackNavigation {
-    fn switch_to_stack_apply(&self);
-    fn switch_to_stack_invalid_image(&self);
+    fn switch_to_stack_decrypt(&self);
+    fn switch_to_stack_invalid_file(&self);
     fn switch_to_stack_loading(&self);
-    fn switch_to_stack_loading_generally(&self);
 }
 
 trait SettingsStore {
@@ -316,26 +326,22 @@ impl ViewHost for AppWindow {
 }
 
 impl StackNavigation for AppWindow {
-    fn switch_to_stack_apply(&self) {
+    fn switch_to_stack_decrypt(&self) {
         self.imp().add_button.set_visible(true);
-        self.imp().stack.set_visible_child_name("stack_apply");
+        self.imp().stack.set_visible_child_name("stack_decrypt");
     }
 
-    fn switch_to_stack_invalid_image(&self) {
+    fn switch_to_stack_invalid_file(&self) {
         self.imp().add_button.set_visible(false);
         self.imp()
             .stack
-            .set_visible_child_name("stack_invalid_image");
+            .set_visible_child_name("stack_invalid_file");
     }
 
     fn switch_to_stack_loading(&self) {
         self.imp().add_button.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_loading");
         self.imp().loading_spinner.start();
-    }
-
-    fn switch_to_stack_loading_generally(&self) {
-        self.switch_to_stack_loading();
     }
 }
 
@@ -391,13 +397,12 @@ impl FileOperations for AppWindow {
 
     fn open_error(&self, error: Option<&str>) {
         if error.is_some() {
-            self.switch_to_stack_invalid_image();
+            self.switch_to_stack_invalid_file();
         }
     }
 
     fn open_load(&self) {
-        self.switch_to_stack_loading_generally();
-        self.imp().loading_spinner.start();
+        self.switch_to_stack_loading();
     }
 
     fn add_success_wrapper(&self, files: Vec<InputFile>) {
