@@ -49,7 +49,7 @@ template $AppWindow: Adw.ApplicationWindow {
                   transition-type: crossfade;
 
                   StackPage {
-                    name: "stack_welcome_page";
+                    name: "stack_welcome";
 
                     child: Adw.StatusPage {
                       icon-name: "dev.deimoshall.DecryptIt";
@@ -103,13 +103,7 @@ template $AppWindow: Adw.ApplicationWindow {
                   StackPage {
                     name: "stack_invalid_file";
 
-                    child: Adw.StatusPage invalid_file {
-                      icon-name: "im-symbolic";
-                      title: _("Could not decrypt file");
-                      description: _("This file could be corrupted or malformed.");
-                      hexpand: true;
-                      vexpand: true;
-                    };
+                    child: $ErrorView error_view {};
                   }
                 }
               };

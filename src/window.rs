@@ -14,7 +14,10 @@ use itertools::Itertools;
 mod imp {
     use std::cell::{Cell, RefCell};
 
-    use crate::{config::PKGDATADIR, views::decrypt::Decrypt};
+    use crate::{
+        config::PKGDATADIR,
+        views::{decrypt::DecryptView, error::ErrorView},
+    };
 
     use super::*;
 
@@ -39,10 +42,9 @@ mod imp {
         #[template_child]
         pub loading_spinner: TemplateChild<gtk::Spinner>,
         #[template_child]
-        pub decrypt_view: TemplateChild<Decrypt>,
-
+        pub decrypt_view: TemplateChild<DecryptView>,
         #[template_child]
-        pub invalid_file: TemplateChild<adw::StatusPage>,
+        pub error_view: TemplateChild<ErrorView>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
@@ -199,6 +201,20 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
+
+        imp.error_view.set_copy_error_listener();
+
+        imp.error_view.set_on_back(clone!(
+            #[weak(rename_to=window)]
+            self,
+            move |_| {
+                window.switch_to_stack_welcome();
+            }
+        ));
+
+        imp.decrypt_view.set_view_host(Box::new(self.clone()));
+
+        imp.error_view.set_view_host(Box::new(self.clone()));
     }
 
     fn setup_drop_target(&self) {
@@ -263,18 +279,12 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.imp()
-            .decrypt_view
-            .set_view_host(Box::new(self.clone()));
-
         match self.imp().decrypt_view.display_urls(files) {
             Ok(()) => {
                 self.switch_to_stack_decrypt();
             }
             Err(err) => {
-                self.imp()
-                    .invalid_file
-                    .set_description(Some(&err.to_string()));
+                self.imp().error_view.set_error(err.to_string());
                 self.show_toast(&gettext("Something went wrong"));
                 self.switch_to_stack_invalid_file();
             }
@@ -309,6 +319,7 @@ pub trait FileOperations {
 }
 
 trait StackNavigation {
+    fn switch_to_stack_welcome(&self);
     fn switch_to_stack_decrypt(&self);
     fn switch_to_stack_invalid_file(&self);
     fn switch_to_stack_loading(&self);
@@ -326,6 +337,19 @@ impl ViewHost for AppWindow {
 }
 
 impl StackNavigation for AppWindow {
+    fn switch_to_stack_welcome(&self) {
+        self.imp().add_button.set_visible(false);
+        // Set a different transition type
+        self.imp()
+            .stack
+            .set_transition_type(gtk::StackTransitionType::SlideLeftRight);
+        self.imp().stack.set_visible_child_name("stack_welcome");
+        // Return to default transition type used in the rest of the views
+        self.imp()
+            .stack
+            .set_transition_type(gtk::StackTransitionType::Crossfade);
+    }
+
     fn switch_to_stack_decrypt(&self) {
         self.imp().add_button.set_visible(true);
         self.imp().stack.set_visible_child_name("stack_decrypt");

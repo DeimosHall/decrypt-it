@@ -2,14 +2,13 @@ use adw::prelude::ActionRowExt;
 use dlc_decoder::DlcDecoder;
 use gettextrs::gettext;
 use gtk::{glib, prelude::*, subclass::prelude::*};
+use std::cell::RefCell;
 
 use crate::{impl_view_host, input_file::InputFile, traits::ViewHost};
+use adw::subclass::bin::BinImpl;
 
 mod imp {
-    use std::cell::RefCell;
-
     use super::*;
-    use adw::subclass::bin::BinImpl;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/dev/deimoshall/DecryptIt/ui/views/decrypt/mod.ui")]
@@ -25,7 +24,7 @@ mod imp {
     #[glib::object_subclass]
     impl ObjectSubclass for Decrypt {
         const NAME: &'static str = "Decrypt";
-        type Type = super::Decrypt;
+        type Type = super::DecryptView;
         type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
@@ -43,12 +42,12 @@ mod imp {
 }
 
 glib::wrapper! {
-    pub struct Decrypt(ObjectSubclass<imp::Decrypt>)
+    pub struct DecryptView(ObjectSubclass<imp::Decrypt>)
     @extends gtk::Widget, adw::Bin,
     @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-impl Decrypt {
+impl DecryptView {
     pub fn new() -> Self {
         glib::Object::new()
     }
@@ -79,11 +78,15 @@ impl Decrypt {
             .css_classes(vec!["flat".to_string()])
             .build();
 
-        let text_clone = text.clone();
-        copy_button.connect_clicked(move |button| {
-            let clipboard = button.clipboard();
-            clipboard.set_text(&text_clone);
-        });
+        copy_button.connect_clicked(glib::clone!(
+            #[weak(rename_to=this)]
+            self,
+            move |button| {
+                let clipboard = button.clipboard();
+                clipboard.set_text(&text);
+                this.show_toast(&gettext("Copied to clipboard"));
+            }
+        ));
 
         row.add_suffix(&copy_button);
         row
@@ -128,4 +131,4 @@ impl Decrypt {
 
 // This expands to
 // impl Decrypt { show_toast() }
-impl_view_host!(Decrypt);
+impl_view_host!(DecryptView);

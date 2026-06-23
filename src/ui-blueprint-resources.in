@@ -1,5 +1,6 @@
 # List of Blueprint files to compile.
 # Keep this file sorted alphabetically.
 views/decrypt/mod.blp
+views/error/mod.blp
 window.blp
 
