@@ -4,7 +4,7 @@ use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
 use crate::traits::ViewHost;
-use crate::{components::drag_overlay::DragOverlay, views::about::About};
+use crate::{components::drag_overlay::DragOverlay, views::about::AboutDialog};
 use adw::prelude::*;
 use gettextrs::gettext;
 use glib::clone;
@@ -248,7 +248,7 @@ impl AppWindow {
     }
 
     fn show_about(&self) {
-        About::show(self);
+        AboutDialog::show(self);
     }
 
     fn show_help_overlay(&self) {

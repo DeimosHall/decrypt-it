@@ -15,11 +15,6 @@
         <file compressed="true" preprocess="xml-stripblanks" alias="views/error/mod.ui">views-error-mod.ui</file>
     </gresource>
 
-    <gresource prefix="/dev/deimoshall/DecryptIt/icons/scalable/apps/">
-        <file alias="io.gitlab.adhami3310.Impression.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/io.gitlab.adhami3310.Impression.svg</file>
-        <file alias="io.gitlab.adhami3310.Footage.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/io.gitlab.adhami3310.Footage.svg</file>
-    </gresource>
-
     <gresource prefix="/dev/deimoshall/DecryptIt/icons/scalable/actions/">
         <file alias="junk-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/junk-symbolic.svg</file>
         <file alias="image-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/image-symbolic.svg</file>
