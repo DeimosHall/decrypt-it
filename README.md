@@ -21,9 +21,9 @@ Coming soon.
 
 Decrypt It is an alternative to [dcrypt.it](https://dcrypt.it/). Having options is always good, isn't it?
 
-Install the app and use it to decrypt your DLC files and get those completely legal links :)
+Install the app and use it to decrypt your DLC files.
 
-<img src="data/resources/screenshots/1.png" alt="View of Decrypt It">
+<img src="data/resources/screenshots/0.png" alt="View of Decrypt It">
 
 You can also drag and drop your files into the app!
 
