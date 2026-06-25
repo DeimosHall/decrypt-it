@@ -42,25 +42,20 @@
     </branding>
 
     <screenshots>
-        <screenshot type="default">
+        <screenshot>
             <image>
                 https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/0.png</image>
-            <caption>Drag and drop window</caption>
+            <caption>DLC file decrypted</caption>
         </screenshot>
         <screenshot>
             <image>
                 https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/1.png</image>
-            <caption>General tab</caption>
+            <caption>Error decrypting</caption>
         </screenshot>
-        <screenshot>
+        <screenshot type="default">
             <image>
                 https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/2.png</image>
-            <caption>Advanced tab</caption>
-        </screenshot>
-        <screenshot>
-            <image>
-                https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/3.png</image>
-            <caption>Advanced tab with more fields</caption>
+            <caption>Drag and drop window</caption>
         </screenshot>
     </screenshots>
 
