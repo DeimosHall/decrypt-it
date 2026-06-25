@@ -33,12 +33,6 @@ template $AppWindow: Adw.ApplicationWindow {
                   ]
                 }
 
-                [title]
-                Adw.ViewSwitcher view_switcher {
-                  visible: false; // Don't show at startup
-                  policy: wide;
-                }
-
                 [end]
                 MenuButton {
                   icon-name: "open-menu-symbolic";
@@ -55,12 +49,12 @@ template $AppWindow: Adw.ApplicationWindow {
                   transition-type: crossfade;
 
                   StackPage {
-                    name: "stack_welcome_page";
+                    name: "stack_welcome";
 
                     child: Adw.StatusPage {
                       icon-name: "dev.deimoshall.DecryptIt";
                       title: _("Decrypt It");
-                      description: _("Drag and drop images here");
+                      description: _("Drag and drop files here");
                       hexpand: true;
                       vexpand: true;
 
@@ -71,7 +65,7 @@ template $AppWindow: Adw.ApplicationWindow {
                         Button open_button {
                           valign: center;
                           halign: center;
-                          label: _("_Open Images…");
+                          label: _("_Open Files…");
                           use-underline: true;
 
                           styles [
@@ -101,53 +95,15 @@ template $AppWindow: Adw.ApplicationWindow {
                   }
 
                   StackPage {
-                    name: "stack_apply";
-                    child: $ApplyView apply_view { };
-                  }
-                  
-                  StackPage {
-                    name: "stack_invalid_image";
+                    name: "stack_decrypt";
 
-                    child: Adw.StatusPage invalid_image {
-                      icon-name: "im-symbolic";
-                      title: _("Could not Load Image");
-                      description: _("This image could be corrupted or may use an unsupported file format.");
-                      hexpand: true;
-                      vexpand: true;
-                    };
+                    child: $Decrypt decrypt_view {};
                   }
 
                   StackPage {
-                    name: "stack_applying";
+                    name: "stack_invalid_file";
 
-                    child: Adw.StatusPage {
-                      title: _("Applying");
-                      description: _("This could take a while");
-
-                      Box {
-                        orientation: vertical;
-                        spacing: 36;
-
-                        ProgressBar progress_bar {
-                          valign: center;
-                          halign: center;
-                          show-text: true;
-                          text: _("Loading…");
-                        }
-
-                        Button cancel_button {
-                          valign: center;
-                          halign: center;
-                          label: _("_Cancel");
-                          use-underline: true;
-
-                          styles [
-                            "destructive-action",
-                            "pill",
-                          ]
-                        }
-                      }
-                    };
+                    child: $ErrorView error_view {};
                   }
                 }
               };

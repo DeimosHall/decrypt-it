@@ -5,31 +5,28 @@ mod color;
 mod components;
 mod file_chooser;
 mod input_file;
-mod magick;
 mod models;
-mod services;
+mod traits;
 mod views;
 mod window;
-
-use std::sync::OnceLock;
 
 use gettextrs::{LocaleCategory, gettext};
 use glib::ExitCode;
 use gtk::{gio, glib};
-use tokio::runtime::Runtime;
 
 use self::application::App;
 use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
-fn runtime() -> &'static Runtime {
-    static RUNTIME: OnceLock<Runtime> = OnceLock::new();
-    RUNTIME.get_or_init(|| {
-        tokio::runtime::Builder::new_multi_thread()
-            .enable_all()
-            .build()
-            .expect("Setting up tokio runtime needs to succeed.")
-    })
-}
+// Re-enable when multiple files processing is implemented
+// fn runtime() -> &'static Runtime {
+//     static RUNTIME: OnceLock<Runtime> = OnceLock::new();
+//     RUNTIME.get_or_init(|| {
+//         tokio::runtime::Builder::new_multi_thread()
+//             .enable_all()
+//             .build()
+//             .expect("Setting up tokio runtime needs to succeed.")
+//     })
+// }
 
 fn main() -> ExitCode {
     // Initialize logger

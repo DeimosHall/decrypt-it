@@ -6,52 +6,35 @@
     <developer id="dev.deimoshall">
         <name translate="no">Deimos Hall</name>
     </developer>
-    <summary>Edit metadata</summary>
+    <summary>Decrypt DLC files</summary>
 
     <metadata_license>CC-BY-SA-4.0</metadata_license>
     <project_license>GPL-3.0-only</project_license>
 
     <description>
         <p>
-            Decrypt It helps you edit EXIF metadata in images.
-            Simply drag and drop files or paste images directly into the app to get started.
-        </p>
-        <p>
-            Supports JPEG, PNG HEIC, AVIF, WebP, and many more image formats.
+            Decrypt It allows you to decrypt your DLC files.
         </p>
     </description>
 
     <categories>
-        <category>Graphics</category>
         <category>Utility</category>
+        <category>FileTools</category>
+        <category>Network</category>
     </categories>
 
     <keywords>
-        <keyword>exif</keyword>
-        <keyword>metadata</keyword>
-        <keyword>image</keyword>
-        <keyword>video</keyword>
-        <keyword>audio</keyword>
-        <keyword>edit</keyword>
-        <keyword>tag</keyword>
-        <keyword>jpeg</keyword>
-        <keyword>png</keyword>
-        <keyword>heic</keyword>
-        <keyword>pdf</keyword>
+        <keyword>decrypt</keyword>
+        <keyword>dlc</keyword>
+        <keyword>jdownloader</keyword>
     </keywords>
 
     <translation type="gettext">@gettext-package@</translation>
 
     <requires>
         <display_length compare="ge">360</display_length>
-        <internet>offline-only</internet>
+        <internet>always</internet>
     </requires>
-
-    <recommends>
-        <control>pointing</control>
-        <control>keyboard</control>
-        <control>touch</control>
-    </recommends>
 
     <branding>
         <color type="primary" scheme_preference="light">#f18e57</color>
@@ -59,37 +42,32 @@
     </branding>
 
     <screenshots>
-        <screenshot type="default">
+        <screenshot>
             <image>
                 https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/0.png</image>
-            <caption>Drag and drop window</caption>
+            <caption>DLC file decrypted</caption>
         </screenshot>
         <screenshot>
             <image>
                 https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/1.png</image>
-            <caption>General tab</caption>
+            <caption>Error decrypting</caption>
         </screenshot>
-        <screenshot>
+        <screenshot type="default">
             <image>
                 https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/2.png</image>
-            <caption>Advanced tab</caption>
-        </screenshot>
-        <screenshot>
-            <image>
-                https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/3.png</image>
-            <caption>Advanced tab with more fields</caption>
+            <caption>Drag and drop window</caption>
         </screenshot>
     </screenshots>
 
     <launchable type="desktop-id">@app-id@.desktop</launchable>
 
-    <url type="homepage">https://github.com/DeimosHall/DecryptIt</url>
+    <url type="homepage">https://github.com/DeimosHall/decrypt-it</url>
     <url type="donation">https://ko-fi.com/deimoshall</url>
-    <url type="bugtracker">https://github.com/DeimosHall/DecryptIt/issues</url>
-    <url type="help">https://github.com/DeimosHall/DecryptIt/issues</url>
-    <url type="vcs-browser">https://github.com/DeimosHall/DecryptIt</url>
-    <url type="translate">https://github.com/DeimosHall/DecryptIt/tree/main/po</url>
-    <url type="contribute">https://github.com/DeimosHall/DecryptIt</url>
+    <url type="bugtracker">https://github.com/DeimosHall/decrypt-it/issues</url>
+    <url type="help">https://github.com/DeimosHall/decrypt-it/issues</url>
+    <url type="vcs-browser">https://github.com/DeimosHall/decrypt-it</url>
+    <url type="translate">https://github.com/DeimosHall/decrypt-it/tree/main/po</url>
+    <url type="contribute">https://github.com/DeimosHall/decrypt-it</url>
     <url type="contact">https://matrix.to/#/@deimoshall:matrix.org</url>
 
     <update_contact>deimoshall.dev@proton.me</update_contact>
@@ -97,46 +75,12 @@
     <content_rating type="oars-1.1" />
 
     <releases>
-        <release version="0.4.0" date="2026-05-23">
+        <release version="0.1.0" date="2026-06-24">
             <description>
-                <p>Add new General and Advanced tabs</p>
+                <p>First version released</p>
                 <ul>
-                    <li>General tab for most common tags</li>
-                    <li>Advanced tab for raw tags and more granular editing</li>
-                    <li>Add more dates, fractional seconds, and timezone offsets fields</li>
-                    <li>Fix remove button stopped working</li>
-                </ul>
-            </description>
-        </release>
-        <release version="0.3.0" date="2026-05-09">
-            <description>
-                <p>Add manufacturer and model fields</p>
-            </description>
-        </release>
-        <release version="0.2.0" date="2026-04-24">
-            <description>
-                <p>Add description field</p>
-            </description>
-        </release>
-        <release version="0.1.2" date="2026-04-15">
-            <description>
-                <p>Update runtime to GNOME 50</p>
-            </description>
-        </release>
-        <release version="0.1.1" date="2026-04-13">
-            <description>
-                <p>Fix ExifTool execution fail due to Perl interpreter not available</p>
-            </description>
-        </release>
-        <release version="0.1.0" date="2026-04-11">
-            <description>
-                <p>Initial release with core features:</p>
-                <ul>
-                    <li>Edit EXIF metadata in images</li>
-                    <li>Support for images (only JPEG tested)</li>
-                    <li>View and modify create date</li>
-                    <li>Set offset time for date values</li>
-                    <li>Write processing software tag</li>
+                    <li>Choose DLC files</li>
+                    <li>View password and URLs</li>
                 </ul>
             </description>
         </release>

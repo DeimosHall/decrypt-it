@@ -19,12 +19,6 @@ Update app screenshots if required.
 
 > New screenshots or modification of existing ones must be added/edited in the [meta info](dev.deimoshall.DecryptIt.metainfo.xml.in.in) file.
 
-## Exiftool
-
-1. Verify the latest `exiftool` version here: [https://exiftool.org/](https://exiftool.org/)
-2. Update the version number in the url field on the [manifest](dev.deimoshall.DecryptIt.json) file.
-3. Update the sha256 field, check the corresponding the the `exiftool` version here: [https://exiftool.org/checksums.txt](https://exiftool.org/checksums.txt)
-
 ## GitHub release
 
 When releasing a new version for flathub, I must create a source tarball that includes the vendored Rust dependencies:

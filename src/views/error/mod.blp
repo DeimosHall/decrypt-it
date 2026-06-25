@@ -1,0 +1,40 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ErrorView: Adw.Bin {
+  Adw.StatusPage error_page {
+    icon-name: "junk-symbolic";
+    title: _("Could not decrypt file");
+    // description: _("This file could be corrupted or malformed.");
+    hexpand: true;
+    vexpand: true;
+
+    child: Box {
+      orientation: vertical;
+      spacing: 15;
+
+      Button copy_error_button {
+        label: _("Copy error");
+        valign: center;
+        halign: center;
+        width-request: 150;
+
+        styles [
+          "pill",
+        ]
+      }
+
+      Button back_button {
+        label: _("Go back");
+        valign: center;
+        halign: center;
+        width-request: 150;
+
+        styles [
+          "suggested-action",
+          "pill",
+        ]
+      }
+    };
+  }
+}

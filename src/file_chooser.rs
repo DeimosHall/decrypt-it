@@ -4,7 +4,6 @@ use gettextrs::gettext;
 use glib::clone;
 use gtk::{gio, prelude::*};
 
-use crate::models::filetypes::{FileType};
 use crate::input_file::InputFile;
 use crate::window::AppWindow;
 
@@ -81,16 +80,14 @@ impl FileChooser {
         B: Fn(&AppWindow, Vec<InputFile>) + 'static,
         C: Fn(&AppWindow, Option<&str>) + 'static,
     {
-        let image_filter = gtk::FileFilter::new();
-        for filter in FileType::input_formats() {
-            image_filter.add_mime_type(filter.as_mime());
-        }
-        image_filter.set_name(Some(&gettext("Images")));
+        let dlc_filter = gtk::FileFilter::new();
+        dlc_filter.add_pattern("*.dlc");
+        dlc_filter.set_name(Some(&gettext("DLC Files")));
 
         let dialog = gtk::FileDialog::builder()
-            .accept_label(gettext("_Select Images"))
+            .accept_label(gettext("_Open DLC Files"))
             .modal(true)
-            .default_filter(&image_filter)
+            .default_filter(&dlc_filter)
             .build();
 
         let Ok(response) = dialog.open_multiple_future(Some(parent)).await else {

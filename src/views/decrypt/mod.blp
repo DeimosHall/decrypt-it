@@ -1,0 +1,32 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $Decrypt: Adw.Bin {
+  Adw.PreferencesPage {
+    title: _("Title");
+
+    Adw.PreferencesGroup {
+      title: _("Password");
+
+      Gtk.ListBox password_container {
+        selection-mode: none;
+
+        styles [
+          "boxed-list",
+        ]
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("URLs");
+
+      Gtk.ListBox url_list_box {
+        selection-mode: none;
+
+        styles [
+          "boxed-list",
+        ]
+      }
+    }
+  }
+}

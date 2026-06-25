@@ -1,7 +1,7 @@
 <div align="center">
 <h1>Decrypt It</h1>
 
-Edit file's metadata.
+Decrypt DLC files.
 
 <img src="data/resources/icons/hicolor/512x512/apps/dev.deimoshall.DecryptIt.png" width="128" height="128" alt="Decrypt It icon">
 
@@ -12,32 +12,20 @@ Edit file's metadata.
 </div>
 
 ## Installation
+
+Coming soon.
+
 <a href='https://flathub.org/apps/details/dev.deimoshall.DecryptIt'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
 
 ## About
 
-Decrypt It is designed to help you edit exif metadata in a simple and reliable way.
+Decrypt It is an alternative to [dcrypt.it](https://dcrypt.it/). Having options is always good, isn't it?
+
+Install the app and use it to decrypt your DLC files.
 
 <img src="data/resources/screenshots/0.png" alt="View of Decrypt It">
 
-Decrypt It supports editing the following datatypes:
-
-- [x] **Images:**
-  - [x] JPEG, JPG, JPE
-  - [x] PNG
-  - [x] TIFF, TIF
-  - [ ] GIF
-  - [ ] BMP, DIB
-  - [x] HEIC, HEIF, HIF
-  - [ ] AVIF
-  - [x] WebP
-- [ ] **RAW formats:** CR2, CR3, NEF, ARW, RAF, ORF, RW2, DNG, and more
-- [ ] **Videos:** MOV, MP4, M4V, AVI, WebM
-- [ ] **Audio:** MP3, M4A, FLAC, OGG
-- [ ] **Documents:** PDF
-- [ ] **XMP sidecar** files
-
-You can also drag and drop as well as paste the copied image into the app!
+You can also drag and drop your files into the app!
 
 ## Contributing
 
@@ -96,6 +84,5 @@ This project is licensed under the GPLv3 license. See the [License](LICENSE) fil
 
 Made with ♥️ by Deimos Hall.
 
-Based on [`Switcheroo`](https://gitlab.com/adhami3310/Switcheroo.git) by Khaleel Al-Adhami, an app to convert and manipulate images.
+Inspired on the code of [`Switcheroo`](https://gitlab.com/adhami3310/Switcheroo.git) by Khaleel Al-Adhami, an app to convert and manipulate images.
 
-This app uses [ExifTool](https://exiftool.org/) under the hood to perform metadata edits.
