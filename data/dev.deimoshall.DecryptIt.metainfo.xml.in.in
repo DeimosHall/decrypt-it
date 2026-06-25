@@ -66,13 +66,13 @@
 
     <launchable type="desktop-id">@app-id@.desktop</launchable>
 
-    <url type="homepage">https://github.com/DeimosHall/DecryptIt</url>
+    <url type="homepage">https://github.com/DeimosHall/decrypt-it</url>
     <url type="donation">https://ko-fi.com/deimoshall</url>
-    <url type="bugtracker">https://github.com/DeimosHall/DecryptIt/issues</url>
-    <url type="help">https://github.com/DeimosHall/DecryptIt/issues</url>
-    <url type="vcs-browser">https://github.com/DeimosHall/DecryptIt</url>
-    <url type="translate">https://github.com/DeimosHall/DecryptIt/tree/main/po</url>
-    <url type="contribute">https://github.com/DeimosHall/DecryptIt</url>
+    <url type="bugtracker">https://github.com/DeimosHall/decrypt-it/issues</url>
+    <url type="help">https://github.com/DeimosHall/decrypt-it/issues</url>
+    <url type="vcs-browser">https://github.com/DeimosHall/decrypt-it</url>
+    <url type="translate">https://github.com/DeimosHall/decrypt-it/tree/main/po</url>
+    <url type="contribute">https://github.com/DeimosHall/decrypt-it</url>
     <url type="contact">https://matrix.to/#/@deimoshall:matrix.org</url>
 
     <update_contact>deimoshall.dev@proton.me</update_contact>
@@ -80,14 +80,12 @@
     <content_rating type="oars-1.1" />
 
     <releases>
-        <release version="0.1.0" date="2026-06-xx">
+        <release version="0.1.0" date="2026-06-24">
             <description>
-                <p>Add new General and Advanced tabs</p>
+                <p>First version released</p>
                 <ul>
-                    <li>General tab for most common tags</li>
-                    <li>Advanced tab for raw tags and more granular editing</li>
-                    <li>Add more dates, fractional seconds, and timezone offsets fields</li>
-                    <li>Fix remove button stopped working</li>
+                    <li>Choose DLC files</li>
+                    <li>View password and URLs</li>
                 </ul>
             </description>
         </release>
