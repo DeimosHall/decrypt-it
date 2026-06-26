@@ -44,17 +44,17 @@
     <screenshots>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/0.png</image>
+                https://raw.githubusercontent.com/DeimosHall/decrypt-it/dev/data/resources/screenshots/0.png</image>
             <caption>DLC file decrypted</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/1.png</image>
+                https://raw.githubusercontent.com/DeimosHall/decrypt-it/dev/data/resources/screenshots/1.png</image>
             <caption>Error decrypting</caption>
         </screenshot>
         <screenshot type="default">
             <image>
-                https://raw.githubusercontent.com/DeimosHall/DecryptIt/dev/data/resources/screenshots/2.png</image>
+                https://raw.githubusercontent.com/DeimosHall/decrypt-it/dev/data/resources/screenshots/2.png</image>
             <caption>Drag and drop window</caption>
         </screenshot>
     </screenshots>
