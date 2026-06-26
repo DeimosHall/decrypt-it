@@ -74,7 +74,12 @@
 
     <content_rating type="oars-1.1" />
 
-    <releases>
+  <releases>
+        <release version="0.1.1" date="2026-06-26">
+            <description>
+                <p>Fix screenshots urls</p>
+            </description>
+        </release>
         <release version="0.1.0" date="2026-06-24">
             <description>
                 <p>First version released</p>
