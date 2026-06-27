@@ -59,7 +59,7 @@ impl DecryptView {
         let urls: Vec<String> = package
             .files
             .iter()
-            .filter_map(|link| Some(link.url.clone()))
+            .map(|link| link.url.clone())
             .collect();
 
         let password = package.password;
