@@ -8,7 +8,8 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  check:
+  rust-lint:
+    name: "Rust build and lint"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -19,14 +20,28 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo check
       - run: cargo clippy --all-features -- -D warnings
+
   build-flatpak:
-    name: "Build Flatpak Bundle"
+    name: "Build flatpak bundle"
+    needs: rust-lint
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
       options: --privileged
     steps:
       - uses: actions/checkout@v7
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Vendor Rust dependencies
+        run: |
+          mkdir -p .cargo
+          cargo vendor --locked vendor
+          cat > .cargo/config.toml << 'EOF'
+          [source.crates-io]
+          replace-with = "vendored-sources"
+          [source.vendored-sources]
+          directory = "vendor"
+          EOF
 
       - name: Build App Bundle
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
