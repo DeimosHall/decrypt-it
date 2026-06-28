@@ -21,6 +21,9 @@ jobs:
       - name: Install system dependencies
         run: dnf clean all && dnf install -y glib2-devel gtk4-devel libadwaita-devel gcc pkgconf-pkg-config
 
+      - name: Meson setup
+        run: meson setup builddir
+
       - name: Rust format
         run: cargo fmt --all --check
 
