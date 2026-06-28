@@ -8,8 +8,26 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: rustfmt, clippy
+
+      - name: Install system dependencies
+        run: sudo apt update && sudo apt install -y libglib2.0-dev libgtk-4-dev libadwaita-1-dev
+
+      - name: Rust format
+        run: cargo fmt --all --check
+
+      - name: Rust lint
+        run: cargo clippy --all-features -- -D warnings
+
   build-flatpak:
     runs-on: ubuntu-latest
+    needs: lint
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
       options: --privileged
@@ -18,12 +36,6 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           components: rustfmt, clippy
-
-      - name: Rust format
-        run: cargo fmt --all --check
-
-      - name: Rust lint
-        run: cargo clippy --all-features -- -D warnings
 
       - name: Vendor Rust dependencies
         run: |
