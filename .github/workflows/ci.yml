@@ -35,7 +35,7 @@ jobs:
 
       - name: Rust lint
         run: |
-          flatpak-builder --build-shell=decrypt-it dev.deimoshall.DecryptIt.json \
+          flatpak-builder --build-shell=decrypt-it dev.deimoshall.DecryptIt.json -- \
             cargo clippy --all-features -- -D warnings
 
       - name: Build App Bundle
