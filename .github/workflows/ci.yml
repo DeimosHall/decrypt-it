@@ -19,6 +19,12 @@ jobs:
         with:
           components: rustfmt, clippy
 
+      - name: Rust format
+        run: cargo fmt --all --check
+
+      - name: Rust lint
+        run: cargo clippy --all-features -- -D warnings
+
       - name: Vendor Rust dependencies
         run: |
           mkdir -p .cargo
@@ -36,11 +42,3 @@ jobs:
           manifest-path: dev.deimoshall.DecryptIt.json
           run-tests: false
           upload-artifact: false
-
-      - name: Rust format
-        run: cargo fmt --all --check
-
-      - name: Rust lint
-        run: |
-          echo "cargo clippy --all-features -- -D warnings" | \
-          flatpak-builder --build-shell=decrypt-it build-dir dev.deimoshall.DecryptIt.json
