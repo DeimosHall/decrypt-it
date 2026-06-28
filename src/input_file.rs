@@ -155,9 +155,10 @@ impl InputFile {
         self.imp().height.get()
     }
 
+    // TODO: remove unnecessary code from this file
     pub fn dimensions(&self) -> Option<(usize, usize)> {
         let (w, h) = (self.width(), self.height());
-        w.and_then(|w| h.map(|h| (w, h)))
+        w.zip(h)
     }
 
     pub fn set_frames(&self, f: usize) {

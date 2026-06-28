@@ -56,11 +56,7 @@ impl DecryptView {
         let decoder = DlcDecoder::new();
         let package = decoder.from_file(file.path())?;
 
-        let urls: Vec<String> = package
-            .files
-            .iter()
-            .filter_map(|link| Some(link.url.clone()))
-            .collect();
+        let urls: Vec<String> = package.files.iter().map(|link| link.url.clone()).collect();
 
         let password = package.password;
 
