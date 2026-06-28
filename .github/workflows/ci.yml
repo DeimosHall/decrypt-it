@@ -23,8 +23,9 @@ jobs:
           components: rustfmt, clippy
 
       - name: Install system dependencies
-        run: dnf clean all && dnf install -y glib2-devel gtk4-devel
-        libadwaita-devel gcc pkgconf-pkg-config blueprint-compiler gettext meson
+        run: >
+          dnf clean all && dnf install -y glib2-devel gtk4-devel
+          libadwaita-devel gcc pkgconf-pkg-config blueprint-compiler gettext meson
 
       - name: Meson setup
         run: meson setup builddir --profile=development
