@@ -28,7 +28,7 @@ jobs:
           libadwaita-devel gcc pkgconf-pkg-config blueprint-compiler gettext meson
 
       - name: Meson setup
-        run: meson setup builddir --profile=development
+        run: meson setup builddir
 
       - name: Rust format
         run: cargo fmt --all --check
