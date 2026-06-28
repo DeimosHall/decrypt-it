@@ -37,6 +37,9 @@ jobs:
       - name: Rust lint
         run: cargo clippy --all-features -- -D warnings
 
+      - name: Rust build
+        run: cargo check
+
   build-flatpak:
     runs-on: ubuntu-latest
     needs: lint
@@ -45,6 +48,8 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v7
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+
       - name: Vendor Rust dependencies
         run: |
           mkdir -p .cargo
