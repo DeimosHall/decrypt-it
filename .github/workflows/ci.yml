@@ -10,6 +10,8 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
     steps:
       - uses: actions/checkout@v7
       - uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -17,7 +19,7 @@ jobs:
           components: rustfmt, clippy
 
       - name: Install system dependencies
-        run: sudo apt update && sudo apt install -y libglib2.0-dev libgtk-4-dev libadwaita-1-dev
+        run: dnf clean all && dnf install -y glib2-devel gtk4-devel libadwaita-devel gcc pkgconf-pkg-config
 
       - name: Rust format
         run: cargo fmt --all --check
@@ -33,10 +35,6 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v7
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
-        with:
-          components: rustfmt, clippy
-
       - name: Vendor Rust dependencies
         run: |
           mkdir -p .cargo
