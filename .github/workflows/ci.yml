@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 env:
   CARGO_TERM_COLOR: always
 
@@ -19,10 +23,11 @@ jobs:
           components: rustfmt, clippy
 
       - name: Install system dependencies
-        run: dnf clean all && dnf install -y glib2-devel gtk4-devel libadwaita-devel gcc pkgconf-pkg-config
+        run: dnf clean all && dnf install -y glib2-devel gtk4-devel
+        libadwaita-devel gcc pkgconf-pkg-config blueprint-compiler gettext meson
 
       - name: Meson setup
-        run: meson setup builddir
+        run: meson setup builddir --profile=development
 
       - name: Rust format
         run: cargo fmt --all --check
