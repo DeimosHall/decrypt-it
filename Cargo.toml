@@ -9,17 +9,17 @@ license = "GPL-3.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-gettext-rs = { version = "0.7", features = ["gettext-system"] }
-glib = "0.22.5"
-gtk = { version = "0.11.2", package = "gtk4", features = ["blueprint", "gnome_50"] }
-adw = { version = "0.9.1", package = "libadwaita", features = ["v1_9"] }
-log = "0.4"
-once_cell = "1.21"
-pretty_env_logger = "0.5"
-itertools = "0.14"
-fdlimit = "0.3"
-derivative = "2.2"
-dlc-decoder = "0.3.0"
+gettext-rs = { version = "0.7.7", features = ["gettext-system"] }
+glib = "0.22.8"
+gtk = { version = "0.11.4", package = "gtk4", features = ["blueprint", "gnome_50"] }
+adw = { version = "0.9.2", package = "libadwaita", features = ["v1_9"] }
+log = "0.4.33"
+once_cell = "1.21.4"
+pretty_env_logger = "0.5.0"
+itertools = "0.15.0"
+fdlimit = "0.3.0"
+derivative = "2.2.0"
+dlc-decoder = "0.3.1"
 
 # These dependencies are false positives for cargo machete
 [package.metadata.cargo-machete]
