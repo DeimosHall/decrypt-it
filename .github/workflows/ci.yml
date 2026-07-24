@@ -26,7 +26,7 @@ jobs:
         run: >
           dnf clean all && dnf install -y glib2-devel gtk4-devel
           libadwaita-devel gcc pkgconf-pkg-config blueprint-compiler gettext
-          meson desktop-file-utils
+          meson desktop-file-utils jq
 
       - name: Meson setup
         run: meson setup builddir
