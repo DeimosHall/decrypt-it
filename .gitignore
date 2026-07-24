@@ -13,6 +13,7 @@ build-dir/
 src/config.rs
 *.ui.in~
 *.ui~
+*.json~
 .flatpak/
 vendor
 .flatpak-builder
