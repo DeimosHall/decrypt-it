@@ -1,6 +1,6 @@
 project('decrypt-it',
   'rust',
-  version: '0.1.2',
+  version: '0.2.0',
   meson_version: '>= 1.4.0',
   license: 'GPLv3',
 )

@@ -6,8 +6,8 @@ Decrypt DLC files.
 <img src="data/resources/icons/hicolor/512x512/apps/dev.deimoshall.DecryptIt.png" width="128" height="128" alt="Decrypt It icon">
 
 [![Installs](https://img.shields.io/flathub/downloads/dev.deimoshall.DecryptIt?style=for-the-badge)](https://flathub.org/apps/details/dev.deimoshall.DecryptIt)
-[![Latest Tag](https://img.shields.io/github/v/tag/deimoshall/DecryptIt?sort=date&style=for-the-badge)](https://github.com/deimoshall/DecryptIt/-/tags)
-[![License](https://img.shields.io/github/license/deimoshall/DecryptIt?style=for-the-badge)](https://github.com/deimoshall/DecryptIt/-/raw/main/LICENSE)
+[![Latest Tag](https://img.shields.io/github/v/tag/deimoshall/decrypt-it?sort=date&style=for-the-badge)](https://github.com/deimoshall/decrypt-it/-/tags)
+[![License](https://img.shields.io/github/license/deimoshall/decrypt-it?style=for-the-badge)](https://github.com/deimoshall/decrypt-it/-/raw/main/LICENSE)
 
 </div>
 
