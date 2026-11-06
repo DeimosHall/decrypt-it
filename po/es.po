@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 09:40-0600\n"
-"PO-Revision-Date: 2026-11-06 09:49-0600\n"
+"POT-Creation-Date: 2026-11-06 12:18-0600\n"
+"PO-Revision-Date: 2026-11-06 12:20-0600\n"
 "Last-Translator: Deimos Hall <deimoshall.dev@proton.me>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -72,44 +72,48 @@ msgid "DLC file decrypted"
 msgstr "Archivo DLC descifrado"
 
 #: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:70
+msgid "Fix missing default screenshot"
+msgstr "Correción de captura de pantalla por defecto faltante"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:75
 msgid "Maintenance update"
 msgstr "Actualización de mantenimiento"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:72
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:81
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:77
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:86
 msgid "Update app dependencies"
 msgstr "Actualizar dependencias de la app"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:73
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:78
 msgid "Update GNOME runtime"
 msgstr "Actualizar el runtime de GNOME"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:79
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:84
 msgid "Fix decrypting errors on some files"
 msgstr "Correción de errores de descrifrado en algunos archivos"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:82
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:87
 msgid "Refactor codebase"
 msgstr "Refactorización de la base de código"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:83
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:89
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:88
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:94
 msgid "Enhance CI"
 msgstr "Mejora del CI"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:94
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:99
 msgid "Fix screenshots urls"
 msgstr "Arreglo de las urls de las capturas de pantalla"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:99
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:104
 msgid "First version released"
 msgstr "Primera versión lanzada"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:101
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:106
 msgid "Choose DLC files"
 msgstr "Elegir archivos DLC"
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:102
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:107
 msgid "View password and URLs"
 msgstr "Mirar contraseña y URLs"
 

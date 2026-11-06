@@ -42,7 +42,7 @@
     </branding>
 
     <screenshots>
-        <screenshot>
+        <screenshot type="default">
             <image>
                 https://raw.githubusercontent.com/DeimosHall/decrypt-it/main/data/resources/screenshots/0.png</image>
             <caption>DLC file decrypted</caption>
@@ -65,6 +65,11 @@
     <content_rating type="oars-1.1" />
 
   <releases>
+        <release version="0.2.2" date="2026-11-06">
+            <description>
+              <p>Fix missing default screenshot</p>
+            </description>
+        </release>
         <release version="0.2.1" date="2026-11-06">
             <description>
               <p>Maintenance update</p>
