@@ -31,14 +31,6 @@ blueprints = custom_target(
     ],
 )
 
-png_dir = 'icons' / 'hicolor' / '512x512' / 'apps'
-install_data(
-  [
-    png_dir / 'dev.deimoshall.Metamorphosis.png',
-  ],
-  install_dir: datadir /png_dir
-)
-
 scalable_dir = 'icons' / 'hicolor' / 'scalable' / 'apps'
 install_data(
   [

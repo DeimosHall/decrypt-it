@@ -85,7 +85,7 @@ impl FileChooser {
         dlc_filter.set_name(Some(&gettext("DLC Files")));
 
         let dialog = gtk::FileDialog::builder()
-            .accept_label(gettext("_Open DLC Files"))
+            .accept_label(gettext("Open DLC Files"))
             .modal(true)
             .default_filter(&dlc_filter)
             .build();

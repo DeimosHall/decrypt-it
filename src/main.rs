@@ -33,7 +33,10 @@ fn main() -> ExitCode {
     pretty_env_logger::init();
 
     // Prepare i18n
-    gettextrs::setlocale(LocaleCategory::LcAll, "");
+    // SAFETY: call setlocale before starting any thread or enabling any POSIX signals
+    unsafe {
+        gettextrs::setlocale(LocaleCategory::LcAll, "");
+    }
     gettextrs::bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
     gettextrs::textdomain(GETTEXT_PACKAGE).expect("Unable to switch to the text domain");
 

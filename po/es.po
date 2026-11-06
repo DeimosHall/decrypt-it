@@ -1,0 +1,245 @@
+#
+# Deimos Hall <deimoshall.dev@proton.me>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unnamed project\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-06 09:40-0600\n"
+"PO-Revision-Date: 2026-11-06 09:49-0600\n"
+"Last-Translator: Deimos Hall <deimoshall.dev@proton.me>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 50.0\n"
+
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:2
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:5 src/window.blp:9
+#: src/window.blp:21 src/window.blp:56 src/main.rs:43
+msgid "Decrypt It"
+msgstr "Decrypt It"
+
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:3
+msgid "DLC Decrypter"
+msgstr "Descifrador DLC"
+
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:4
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:9
+msgid "Decrypt DLC files"
+msgstr "Descifrar archivos DLC"
+
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:10
+msgid "dlc;decrypt"
+msgstr "dlc;descifrar"
+
+#: data/dev.deimoshall.DecryptIt.desktop.in.in:20 src/window.blp:162
+msgid "New Window"
+msgstr "Nueva Ventana"
+
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:6
+msgid "Window width"
+msgstr "Anchura de ventana"
+
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:10
+msgid "Window height"
+msgstr "Altura de ventana"
+
+#: data/dev.deimoshall.DecryptIt.gschema.xml.in:14
+msgid "Window maximized state"
+msgstr "Estado maximizado de la ventana"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:15
+msgid "Decrypt It allows you to decrypt your DLC files."
+msgstr "Decrypt It te permite descifrar tus archivos DLC."
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:27
+msgid "decrypt"
+msgstr "descifrar"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:28
+msgid "dlc"
+msgstr "dlc"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:29
+msgid "jdownloader"
+msgstr "jdownloader"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:48
+msgid "DLC file decrypted"
+msgstr "Archivo DLC descifrado"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:70
+msgid "Maintenance update"
+msgstr "Actualización de mantenimiento"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:72
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:81
+msgid "Update app dependencies"
+msgstr "Actualizar dependencias de la app"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:73
+msgid "Update GNOME runtime"
+msgstr "Actualizar el runtime de GNOME"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:79
+msgid "Fix decrypting errors on some files"
+msgstr "Correción de errores de descrifrado en algunos archivos"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:82
+msgid "Refactor codebase"
+msgstr "Refactorización de la base de código"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:83
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:89
+msgid "Enhance CI"
+msgstr "Mejora del CI"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:94
+msgid "Fix screenshots urls"
+msgstr "Arreglo de las urls de las capturas de pantalla"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:99
+msgid "First version released"
+msgstr "Primera versión lanzada"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:101
+msgid "Choose DLC files"
+msgstr "Elegir archivos DLC"
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:102
+msgid "View password and URLs"
+msgstr "Mirar contraseña y URLs"
+
+#: src/views/decrypt/mod.blp:6
+msgid "Title"
+msgstr "Título"
+
+#: src/views/decrypt/mod.blp:9
+msgid "Password"
+msgstr "Contraseña"
+
+#: src/views/decrypt/mod.blp:21
+msgid "URLs"
+msgstr "URLs"
+
+#: src/views/error/mod.blp:7
+msgid "Could not decrypt file"
+msgstr "No se pudo descifrar el archivo"
+
+#: src/views/error/mod.blp:17
+msgid "Copy error"
+msgstr "Copiar error"
+
+#: src/views/error/mod.blp:28
+msgid "Go back"
+msgstr "Volver"
+
+#: src/window.blp:15
+msgid "Drop Here to Open"
+msgstr "Arrastrar aquí para abrir"
+
+#: src/window.blp:28
+msgid "Add Files (Ctrl+O)"
+msgstr "Agregar Archivos (Ctrl+O)"
+
+#: src/window.blp:40
+msgid "Primary Menu"
+msgstr "Menú Principal"
+
+#: src/window.blp:57
+msgid "Drag and drop files here"
+msgstr "Arrastrar y soltar archivos aquí"
+
+#: src/window.blp:68
+msgid "Open Files"
+msgstr "Abrir Archivos"
+
+#: src/window.blp:120
+msgctxt "shortcut window"
+msgid "General"
+msgstr "General"
+
+#: src/window.blp:123
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Mostrar atajos"
+
+#: src/window.blp:128
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Cerrar"
+
+#: src/window.blp:133
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nueva Ventana"
+
+#: src/window.blp:138
+msgctxt "shortcut window"
+msgid "Clear Window"
+msgstr "Limpiar Ventana"
+
+#: src/window.blp:143
+msgctxt "shortcut window"
+msgid "Paste From Clipboard"
+msgstr "Pegar desde el Portapapeles"
+
+#: src/window.blp:148
+msgctxt "shortcut window"
+msgid "Add Files"
+msgstr "Agregar Archivos"
+
+#: src/window.blp:157
+msgid "Paste From Clipboard"
+msgstr "Pegar desde el Portapapeles"
+
+#: src/window.blp:167
+msgid "Clear Window"
+msgstr "Limpiar Ventana"
+
+#: src/window.blp:174
+msgid "Keyboard Shortcuts"
+msgstr "Atajos de Teclado"
+
+#: src/window.blp:179
+msgid "About Decrypt It"
+msgstr "Acerca de Decrypt It"
+
+#: src/file_chooser.rs:38 src/window.rs:406
+msgid "Unsupported filetype"
+msgstr "Tipo de archivo no compatible"
+
+#: src/file_chooser.rs:85
+msgid "DLC Files"
+msgstr "Archivos DLC"
+
+#: src/file_chooser.rs:88
+msgid "Open DLC Files"
+msgstr "Abrir achivos DLC"
+
+#: src/views/about/mod.rs:21
+msgid "translator-credits"
+msgstr ""
+
+#: src/views/about/mod.rs:25
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
+
+#: src/views/about/mod.rs:26
+msgid "Edit Metadata"
+msgstr "Editar metadatos"
+
+#: src/views/about/mod.rs:30
+msgid "Code and Design Borrowed from"
+msgstr "Código y Diseño Tomados de"
+
+#: src/window.rs:234
+msgid "Unable to access dropped files"
+msgstr "No se puede acceder a los archivos arrastrados"
+
+#: src/window.rs:288
+msgid "Something went wrong"
+msgstr "Algo salió mal"

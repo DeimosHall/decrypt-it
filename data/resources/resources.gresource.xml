@@ -8,6 +8,10 @@
         <file compressed="true">icons/hicolor/scalable/apps/dev.deimoshall.DecryptIt.svg</file>
         <file compressed="true">icons/hicolor/scalable/apps/dev.deimoshall.DecryptIt.Devel.svg</file>
     </gresource>
+  
+    <gresource prefix="/dev/deimoshall/DecryptIt/icons/scalable/apps/">
+        <file alias="dev.deimoshall.Metamorphosis.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/dev.deimoshall.Metamorphosis.svg</file>
+    </gresource>
 
     <gresource prefix="/dev/deimoshall/DecryptIt/ui/">
         <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">window.ui</file>

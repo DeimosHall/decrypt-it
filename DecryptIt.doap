@@ -5,11 +5,11 @@
 		xmlns:gnome="http://api.gnome.org/doap-extensions#">
 
 	<name xml:lang="en">Decrypt It</name>
-	<shortdesc xml:lang="en">Edit exif metadata of images and videos</shortdesc>
+	<shortdesc xml:lang="en">Decrypt DLC files</shortdesc>
 
-	<homepage rdf:resource="https://github.com/DeimosHall/DecryptIt"/>
+	<homepage rdf:resource="https://github.com/DeimosHall/decrypt-it"/>
 	<download-page rdf:resource="https://flathub.org/apps/details/dev.deimoshall.DecryptIt"/>
-	<bug-database rdf:resource="https://github.com/DeimosHall/DecryptIt/issues"/>
+	<bug-database rdf:resource="https://github.com/DeimosHall/decrypt-it/issues"/>
 
 	<programming-language>Rust</programming-language>
 	<platform>GTK 4</platform>
@@ -17,8 +17,8 @@
 
 	<repository>
 		<GitRepository>
-			<location rdf:resource="https://github.com/DeimosHall/DecryptIt.git"/>
-			<browse rdf:resource="https://github.com/DeimosHall/DecryptIt"/>
+			<location rdf:resource="https://github.com/DeimosHall/decrypt-it.git"/>
+			<browse rdf:resource="https://github.com/DeimosHall/decrypt-it"/>
 		</GitRepository>
 	</repository>
 
