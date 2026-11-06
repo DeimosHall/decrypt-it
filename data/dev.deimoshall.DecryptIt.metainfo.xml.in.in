@@ -44,18 +44,8 @@
     <screenshots>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/decrypt-it/dev/data/resources/screenshots/0.png</image>
+                https://raw.githubusercontent.com/DeimosHall/decrypt-it/main/data/resources/screenshots/0.png</image>
             <caption>DLC file decrypted</caption>
-        </screenshot>
-        <screenshot>
-            <image>
-                https://raw.githubusercontent.com/DeimosHall/decrypt-it/dev/data/resources/screenshots/1.png</image>
-            <caption>Error decrypting</caption>
-        </screenshot>
-        <screenshot type="default">
-            <image>
-                https://raw.githubusercontent.com/DeimosHall/decrypt-it/dev/data/resources/screenshots/2.png</image>
-            <caption>Drag and drop window</caption>
         </screenshot>
     </screenshots>
 
@@ -75,6 +65,15 @@
     <content_rating type="oars-1.1" />
 
   <releases>
+        <release version="0.2.1" date="2026-11-06">
+            <description>
+              <p>Maintanance update</p>
+                <ul>
+                    <li>Update app dependencies</li>
+                    <li>Update GNOME runtime</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.2.0" date="2026-07-25">
             <description>
               <p>Fix decrypting errors on some files</p>
