@@ -166,12 +166,12 @@ impl App {
     fn setup_accels(&self) {
         self.set_accels_for_action("app.new-window", &["<Control>n"]);
         self.set_accels_for_action("app.quit", &["<Control>q"]);
+        // TODO: add clear funtion
         self.set_accels_for_action("win.clear", &["<Control>r"]);
         self.set_accels_for_action("win.add", &["<Control>o"]);
         self.set_accels_for_action("win.close", &["<Control>w"]);
         self.set_accels_for_action("win.paste", &["<Control>v"]);
         self.set_accels_for_action("win.show-help-overlay", &["<Control>question"]);
-        self.set_accels_for_action("win.exif", &["<Control>f"]);
     }
 
     fn present_main_window(&self) {
