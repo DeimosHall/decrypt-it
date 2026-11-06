@@ -67,7 +67,7 @@
   <releases>
         <release version="0.2.1" date="2026-11-06">
             <description>
-              <p>Maintanance update</p>
+              <p>Maintenance update</p>
                 <ul>
                     <li>Update app dependencies</li>
                     <li>Update GNOME runtime</li>

@@ -5,11 +5,11 @@ data/dev.deimoshall.DecryptIt.desktop.in.in
 data/dev.deimoshall.DecryptIt.gschema.xml.in
 data/dev.deimoshall.DecryptIt.metainfo.xml.in.in
 # UI files
-data/resources/blueprints/image-rest.blp
-data/resources/blueprints/window.blp
+src/views/decrypt/mod.blp
+src/views/error/mod.blp
+src/window.blp
 # RUST files
 src/file_chooser.rs
-src/magick.rs
 src/main.rs
-src/widgets/about_window.rs
+src/views/about/mod.rs
 src/window.rs
