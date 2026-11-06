@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: decrypt-it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 09:40-0600\n"
+"POT-Creation-Date: 2026-11-06 12:18-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,44 +73,48 @@ msgid "DLC file decrypted"
 msgstr ""
 
 #: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:70
+msgid "Fix missing default screenshot"
+msgstr ""
+
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:75
 msgid "Maintenance update"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:72
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:81
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:77
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:86
 msgid "Update app dependencies"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:73
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:78
 msgid "Update GNOME runtime"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:79
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:84
 msgid "Fix decrypting errors on some files"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:82
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:87
 msgid "Refactor codebase"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:83
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:89
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:88
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:94
 msgid "Enhance CI"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:94
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:99
 msgid "Fix screenshots urls"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:99
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:104
 msgid "First version released"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:101
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:106
 msgid "Choose DLC files"
 msgstr ""
 
-#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:102
+#: data/dev.deimoshall.DecryptIt.metainfo.xml.in.in:107
 msgid "View password and URLs"
 msgstr ""
 
